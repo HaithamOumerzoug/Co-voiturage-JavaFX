@@ -11,7 +11,7 @@ public class Offer {
 	private String Ville_depart;
 	private String Ville_arrive;
 	private int Nbr_places;
-	private String Bagage;
+	private String Bagage ="Oui";
 	private long Id_Utilisateur;
 	private int Id_Admin;
 	public Offer() {
