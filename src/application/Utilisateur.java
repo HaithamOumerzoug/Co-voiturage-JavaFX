@@ -158,7 +158,7 @@ public class Utilisateur {
 		} 
 		return b;
 	}
-	public boolean AjouterOffer(String titre , float prix , String Date_depart , String Heure_depart,String Ville_depart,String Ville_arrive,int Nbr_places,int Bagage){
+	public boolean AjouterOffer(String titre , float prix , String Date_depart , String Heure_depart,String Ville_depart,String Ville_arrive,int Nbr_places,String Bagage){
 		try {
 			Statement st;
 			st = con.createStatement();
