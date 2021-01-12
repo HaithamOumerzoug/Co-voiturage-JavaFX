@@ -11,7 +11,7 @@ public class Offer {
 	private String Ville_depart;
 	private String Ville_arrive;
 	private int Nbr_places;
-	private int Bagage;
+	private String Bagage;
 	private long Id_Utilisateur;
 	private int Id_Admin;
 	public Offer() {
@@ -19,7 +19,7 @@ public class Offer {
 	}
 	
 	public Offer(long id_offer, String titre, float prix, String date_departe, String heure_depart, String ville_depart,
-			String ville_arrive, int nbr_places, int bagage) {
+			String ville_arrive, int nbr_places, String bagage) {
 		super();
 		Id_offer = id_offer;
 		this.titre = titre;
@@ -91,10 +91,10 @@ public class Offer {
 	public void setNbr_places(int nbr_places) {
 		Nbr_places = nbr_places;
 	}
-	public int getBagage() {
+	public String getBagage() {
 		return Bagage;
 	}
-	public void setBagage(int bagage) {
+	public void setBagage(String bagage) {
 		Bagage = bagage;
 	}
 	public long getId_Utilisateur() {
