@@ -344,19 +344,20 @@ public class Utilisateur {
 		}
 		return IdUser;
 	}
-	public ArrayList<Utilisateur> getMesInf(){
-		 ArrayList<Utilisateur> MesInf = new ArrayList<Utilisateur>();
-		 try {
-			 Statement st = con.createStatement();
-			 ResultSet resu;
-			 String sql="select * from utilisateurs where Id_Utilisateur ='"+this.IdUser+"'";
-			 resu = st.executeQuery(sql);
-			 while(resu.next()) {
-				 MesInf.add(new Utilisateur(resu.getString("Nom"),resu.getString("Email"),resu.getString("Mot_de_passe"),resu.getString("Tel"),resu.getString("Adresse")));
-			 }
-		 }catch(SQLException e) {
-			 MesInf = null;
-		 }
-		 return MesInf;
-	 }
+	public Utilisateur getMesInf() {
+		Utilisateur user = new Utilisateur();
+		try {
+			Statement st;
+			st=con.createStatement();
+			ResultSet resu;
+			String sql = "select * from utilisateurs where Id_Utilisateur = '"+this.IdUser+"'";
+			resu = st.executeQuery(sql);
+			while(resu.next()) {
+			           user = new Utilisateur(resu.getString("Nom"),resu.getString("Email"),resu.getString("Mot_de_passe"),resu.getString("Tel"),resu.getString("Adresse"));
+			}	
+		}catch(SQLException e) {
+			             return user;
+		}
+		return user;
+	}
 }
