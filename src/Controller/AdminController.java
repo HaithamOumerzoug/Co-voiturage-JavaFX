@@ -257,7 +257,7 @@ public class AdminController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(BonAdm != null) {
 			LoginController loginController = new LoginController();
-			BonAdm.setText("Bonjour "+loginController.admin.getMesInf().get(0).getNom());
+			BonAdm.setText("Bienvenue "+loginController.admin.getMesInf().get(0).getNom());
 		}
 		if(this.tableUser != null )  this.afficherUtilisateurs();
 		if(this.tableOffre != null ) this.afficherOffres();
