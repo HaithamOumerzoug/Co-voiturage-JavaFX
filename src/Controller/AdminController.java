@@ -178,7 +178,7 @@ public class AdminController implements Initializable {
     	try {
     		ConnexionMysql cont = new ConnexionMysql();
         	Connection con = cont.ConnDB();
-			String sql = "SELECT  *  FROM Utilisateurs ";
+			String sql = "SELECT  *  FROM utilisateurs ";
 			PreparedStatement stat = (PreparedStatement) con.prepareStatement(sql);
 			ResultSet resu = stat.executeQuery();
 			while(resu.next()) {
@@ -206,7 +206,7 @@ public class AdminController implements Initializable {
     	try {
     		ConnexionMysql cont = new ConnexionMysql();
         	Connection con = cont.ConnDB();
-			String sql = "SELECT  *  FROM Offres ";
+			String sql = "SELECT  *  FROM offres ";
 			PreparedStatement stat = (PreparedStatement) con.prepareStatement(sql);
 			ResultSet resu = stat.executeQuery();
 			while(resu.next()) {
