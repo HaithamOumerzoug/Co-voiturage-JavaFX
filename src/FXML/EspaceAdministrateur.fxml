@@ -17,7 +17,7 @@
                   <Image url="@../../Images/Covo.jpg" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="38.0" layoutY="16.0" prefHeight="67.0" prefWidth="587.0" style="-fx-background-color: blue; -fx-font-size: 20pt;" text="Bonjour L'Adminisatrateurs" textFill="WHITE" />
+            <Label  fx:id="BonAdm" alignment="CENTER" layoutX="38.0" layoutY="16.0" prefHeight="67.0" prefWidth="587.0" style="-fx-background-color: blue; -fx-font-size: 20pt;" text="Bonjour L'Adminisatrateurs" textFill="WHITE" />
             <Button fx:id="ModifierMesInf" alignment="CENTER" layoutX="178.0" layoutY="270.0" mnemonicParsing="false" onAction="#toModifierMesInf" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-background-color: blue;" text="Modifier Mes informations" textFill="WHITE" />
             <Button fx:id="DeconnexionAdm" layoutX="178.0" layoutY="349.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-font-family: monospace; -fx-background-color: blue;" text="Deconnexion" textFill="WHITE" />
             <Button fx:id="GestionnaireOffres" alignment="CENTER" layoutX="178.0" layoutY="191.0" mnemonicParsing="false" onAction="#toGestionnaireOffres" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-background-color: blue;" text="Gestionnaire Offres" textFill="WHITE" />
