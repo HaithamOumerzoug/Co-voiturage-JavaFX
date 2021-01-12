@@ -16,7 +16,7 @@ public class Main  extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/FXML/LoginMain.fxml"));
-		Scene scene = new Scene(root,750,400);
+		Scene scene = new Scene(root,750,500);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Co-Voiturage Application");
