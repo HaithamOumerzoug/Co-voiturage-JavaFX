@@ -1,4 +1,4 @@
-<h1 align="center" color="red">Co-voiturage</h1>
+<h1 align="center">Co-voiturage</h1>
 <h3 align="center">Java Desktop application</h3>
 
 ## Introduction
