@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="466.0" fitWidth="716.0" layoutX="-3.0" layoutY="-4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/Covo.jpg" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="38.0" layoutY="16.0" prefHeight="67.0" prefWidth="587.0" style="-fx-background-color: blue; -fx-font-size: 20pt;" text="Bonjour L'Adminisatrateurs" textFill="WHITE" />
+            <Button fx:id="ModifierMesInf" alignment="CENTER" layoutX="178.0" layoutY="270.0" mnemonicParsing="false" onAction="#toModifierMesInf" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-background-color: blue;" text="Modifier Mes informations" textFill="WHITE" />
+            <Button fx:id="DeconnexionAdm" layoutX="178.0" layoutY="349.0" mnemonicParsing="false" onAction="#Deconnexion" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-font-family: monospace; -fx-background-color: blue;" text="Deconnexion" textFill="WHITE" />
+            <Button fx:id="GestionnaireOffres" alignment="CENTER" layoutX="178.0" layoutY="191.0" mnemonicParsing="false" onAction="#toGestionnaireOffres" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-background-color: blue;" text="Gestionnaire Offres" textFill="WHITE" />
+            <Button fx:id="GestionnaireUsers" alignment="CENTER" layoutX="176.0" layoutY="109.0" mnemonicParsing="false" onAction="#toGestionnaireUsers" prefHeight="54.0" prefWidth="312.0" style="-fx-font-size: 14pt; -fx-background-color: blue;" text="Gestionnaire  des Utilisateurs" textFill="WHITE" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

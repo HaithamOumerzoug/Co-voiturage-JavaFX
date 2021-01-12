@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="439.0" prefWidth="691.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="tableMessages" layoutY="110.0" prefHeight="434.0" prefWidth="906.0">
+               <columns>
+                  <TableColumn fx:id="emailSrc" prefWidth="210.0" text="Source" />
+                  <TableColumn fx:id="Contenue" prefWidth="695.0" text="Contenue" />
+               </columns>
+            </TableView>
+            <ImageView fx:id="resetMessage" fitHeight="51.0" fitWidth="51.0" layoutX="14.0" layoutY="46.0" onMouseClicked="#AfficherMessages" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/reset.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exitUser" fitHeight="51.0" fitWidth="51.0" layoutX="187.0" layoutY="46.0" onMouseClicked="#exitToIntrUser" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/exit.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="6.0" layoutY="6.0" prefHeight="31.0" prefWidth="361.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold;" text="Gestion des Messages:" textFill="RED" />
+            <ImageView fx:id="DeleteMessage" fitHeight="51.0" fitWidth="60.0" layoutX="110.0" layoutY="46.0" onMouseClicked="#toSupprimerMessage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/supprimer.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="envoyer_message" fitHeight="69.0" fitWidth="83.0" layoutX="266.0" layoutY="28.0" onMouseClicked="#toEnvoyerMessage" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/envoyer.png" />
+               </image>
+            </ImageView>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
