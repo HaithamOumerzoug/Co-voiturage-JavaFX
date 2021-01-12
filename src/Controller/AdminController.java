@@ -26,10 +26,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Label;
 public class AdminController implements Initializable {
-	@FXML private Button GestionnaireOffres;
-	@FXML private Button GestionnaireUsers;
-	@FXML private Button exitButton;
+    @FXML private Button GestionnaireOffres;
+    @FXML private Button GestionnaireUsers;
+    @FXML private Button exitButton;
     @FXML private Button DeconnexionAdm;
     @FXML private Button ModifierMesInf;
     @FXML private ImageView exitUser;
@@ -56,23 +58,14 @@ public class AdminController implements Initializable {
     @FXML private TableColumn<Offer,Long> IdUser2;
     @FXML private TextField EmailUserDel;
     @FXML private TextField IdOffreValue;
+    @FXML private Label BonAdm;
+    @FXML private AnchorPane RegisterBackground;
     @FXML
     public void toModifierMesInf() throws IOException {
     	DeconnexionAdm.getScene().getWindow().hide();
     	GestionnaireOffres.getScene().getWindow().hide();
     	GestionnaireUsers.getScene().getWindow().hide();
     	Stage ModifierInf = new Stage();
-    	/*
-    	TextField txt = new TextField();
-    	txt.setText("bonjour");
-    	nomAdm = txt;
-    	LoginController loginController = new LoginController();
-    	nomAdm.setText(loginController.admin.getMesInf().get(0).getNom());
-    	emailAdm.setText(loginController.admin.getMesInf().get(0).getEmail());
-    	MotDePasseAdm.setText(loginController.admin.getMesInf().get(0).getMot_de_passe());
-    	telephoneAdm.setText(loginController.admin.getMesInf().get(0).getTel());
-    	adresseAdm.setText(loginController.admin.getMesInf().get(0).getAdresse());
-    	*/
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/ModifierMesInf.fxml"));
     	Scene scene = new Scene(root);
     	ModifierInf.setTitle("Espace de l'utilisateur");
@@ -262,5 +255,19 @@ public class AdminController implements Initializable {
     }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		if(BonAdm != null) {
+			LoginController loginController = new LoginController();
+			BonAdm.setText("Bonjour "+loginController.admin.getMesInf().get(0).getNom());
+		}
+		if(this.tableUser != null )  this.afficherUtilisateurs();
+		if(this.tableOffre != null ) this.afficherOffres();
+		if(this.RegisterBackground != null) {
+			LoginController loginController = new LoginController();
+			this.nomAdm.setText(loginController.admin.getMesInf().get(0).getNom());
+			this.emailAdm.setText(loginController.admin.getMesInf().get(0).getEmail());
+			this.MotDePasseAdm.setText(loginController.admin.getMesInf().get(0).getMot_de_passe());
+			this.telephoneAdm.setText(loginController.admin.getMesInf().get(0).getTel());
+			this.adresseAdm.setText(loginController.admin.getMesInf().get(0).getAdresse());
+		}
 	}
 }
