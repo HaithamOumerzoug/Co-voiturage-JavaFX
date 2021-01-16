@@ -1,6 +1,5 @@
 package application;
 import java.sql.*;
-import java.util.ArrayList;
 public class Utilisateur {
 	private long Id_Utilisateur;
 	private String nom;
@@ -138,11 +137,25 @@ public class Utilisateur {
 				b=false;
 			}
 		 }catch(SQLException e) {
-			//b=false;
-			 e.printStackTrace();
-			 b=false;
+			b=false;
 		} 
 		return b;
+	}
+	public Utilisateur getMesInf() {
+		Utilisateur user = new Utilisateur();
+		try {
+			Statement st;
+			st=con.createStatement();
+			ResultSet resu;
+			String sql = "select * from utilisateurs where Id_Utilisateur = '"+this.IdUser+"'";
+			resu = st.executeQuery(sql);
+			while(resu.next()) {
+			           user = new Utilisateur(resu.getString("Nom"),resu.getString("Email"),cont.dechiffrer(resu.getString("Mot_de_passe")),resu.getString("Tel"),resu.getString("Adresse"));
+			}	
+		}catch(SQLException e) {
+			             return user;
+		}
+		return user;
 	}
 	public boolean Changer_Mot_De_Passe(String mot_de_passe) {
 		boolean b=false;
@@ -163,7 +176,7 @@ public class Utilisateur {
 			Statement st;
 			st = con.createStatement();
 			if(Adm.getId_Admin() != 0) {
-				String sql = "insert into Offres(titre,prix,Date_depart,Heure_depart,Ville_depart,Ville_arrive,Nbr_places,Bagage,Id_Utilisateur,Id_Admin) values('"+titre+"','"+prix+"','"+Date_depart+"','"+Heure_depart+"','"+Ville_depart+"','"+Ville_arrive+"','"+Nbr_places+"','"+Bagage+"','"+this.IdUser+"','"+Adm.getId_Admin()+"')";
+				String sql = "insert into offres(titre,prix,Date_depart,Heure_depart,Ville_depart,Ville_arrive,Nbr_places,Bagage,Id_Utilisateur,Id_Admin) values('"+titre+"','"+prix+"','"+Date_depart+"','"+Heure_depart+"','"+Ville_depart+"','"+Ville_arrive+"','"+Nbr_places+"','"+Bagage+"','"+this.IdUser+"','"+Adm.getId_Admin()+"')";
 				st.executeUpdate(sql);
 				return true;
 			}else {
@@ -182,7 +195,7 @@ public class Utilisateur {
 			if(c=="my") {
 				 sql = "select * from offres where Id_Utilisateur = '"+this.IdUser+"'";
 			}else if(c=="all") {
-				 sql="select * from offres where Id_Utilisateur != '"+this.IdUser+"'";
+				 sql="select * from offres where Id_Utilisateur != '"+this.IdUser+"' and Nbr_places > 0";
 			}
 			resu = st.executeQuery(sql);
 			return resu;
@@ -190,13 +203,13 @@ public class Utilisateur {
 			return null;
 		}
 	}
-	 public boolean SupprimerOffer(long IdOffer){
+	 public boolean SupprimerOffer(long IdOffre){
 	 	try{
 	 		Statement st;
 	 		st = con.createStatement();
-	 		String sql00 = "delete from favoris where Id_offre = '"+IdOffer+"'";
+	 		String sql00 = "delete from favoris where Id_offre = '"+IdOffre+"'";
 	 		st.executeUpdate(sql00);
-	 		String sql = "delete from  offers where Id_Utilisateur = '"+this.IdUser+"' and  Id_offer = '"+IdOffer+"'";
+	 		String sql = "delete from  offres where Id_Utilisateur = '"+this.IdUser+"' and  Id_offer = '"+IdOffre+"'";
 	 		st.executeUpdate(sql);
 	 		return true;
 	 	}catch(SQLException e){
@@ -214,13 +227,14 @@ public class Utilisateur {
 			 return false;
 		 }
 	 }
-	 public ResultSet Afficher_Mes_Favorites(){
+   public ResultSet Afficher_Mes_Favorites2(){
 		 try {
 			 Statement st;
 			 st = con.createStatement();
 			 ResultSet resu;
-			 String sql = "select * from offres,favoris where favoris.Id_Utilisateur = offers.Id_Utilisateur and favoris.Id_Utilisateur='"+this.IdUser+"';";
+			 String sql = "SELECT * FROM offres WHERE Id_offer IN ( SELECT Id_offre FROM favoris WHERE Id_Utilisateur = '"+this.IdUser+"');";
 			 resu = st.executeQuery(sql);
+			 
 			 return resu;
 		 }catch(SQLException e) {
 			   return null;
@@ -243,7 +257,6 @@ public class Utilisateur {
 				String sql2 = "insert into reservations (Id_Utilisateur,Id_offer,message,Nbr_places) values ('"+this.IdUser+"','"+IdOffres+"','"+message+"','"+NbrDePlace+"');";
 				st.executeUpdate(sql1);
 				st.executeUpdate(sql2);
-				if(NbrDePlace == Le_Reste)  this.SupprimerOffer(IdOffres);
 				nbr = 1;
 			}else nbr = 0;
 		}catch(SQLException e) {
@@ -265,6 +278,18 @@ public class Utilisateur {
 			}
 		}catch(SQLException e) {
 			    return false;
+		}
+	}
+	public ResultSet AfficherReservation() {
+		try {
+			Statement st;
+			st = con.createStatement();
+			ResultSet resu;
+			String sql = "SELECT offres.Id_offer AS idOfr , prix , Titre , Ville_depart , Ville_arrive , Date_depart , Heure_depart , offres.Nbr_places AS nbrPlacesrest , reservations.Nbr_places AS nbrPlacesreserv , Bagage FROM offres,reservations WHERE reservations.Id_Utilisateur = '"+this.IdUser+"' AND reservations.Id_offer = offres.Id_offer";
+			resu = st.executeQuery(sql);
+			return resu;
+			}catch(SQLException e) {
+			return null;
 		}
 	}
 	public ResultSet afficher_les_message() {
@@ -290,7 +315,6 @@ public class Utilisateur {
 		}catch(SQLException e) {
 			return null;
 		}
-		
 	}
 	public int Nombre_Utilisateur() {
 		int nbr=0;
@@ -308,15 +332,14 @@ public class Utilisateur {
 		}
 		return nbr;
 	}
-	public int Nombre_offer_pour(String email) {
+	public int Nombre_offer_disp_pour(long idd) {
 		int nbr=-1;
 		try {
 			Statement st;
 			st = con.createStatement();
-			long IdUser = this.getIdOfEmail(email);
 			ResultSet resu ;
-			if (IdUser != -1) {
-				String sql = "select count(*) as totale from offres where Id_Utilisateur = '"+IdUser+"'";
+			if (idd != -1) {
+				String sql = "select count(*) as totale from offres where Id_Utilisateur != '"+idd+"'";
 				resu = st.executeQuery(sql);
 				while(resu.next()) {
 					nbr = resu.getInt("totale");
@@ -344,20 +367,196 @@ public class Utilisateur {
 		}
 		return IdUser;
 	}
-	public Utilisateur getMesInf() {
-		Utilisateur user = new Utilisateur();
+	public boolean favorisexist(long IdOffre) {
+		int nbr=0;
 		try {
 			Statement st;
-			st=con.createStatement();
+			st = con.createStatement();
+			ResultSet resu ;
+			if (this.IdUser != -1) {
+				String sql = "select count(*) as totale from favoris where Id_Utilisateur = '"+this.IdUser+"' AND Id_offre = '"+IdOffre+"';";
+				resu = st.executeQuery(sql);
+				while(resu.next()) {
+					nbr = resu.getInt("totale");
+				}
+				
+			}else nbr = 0;
+		}catch(SQLException e) {
+			nbr = 0;
+		}
+		return nbr>0 ? true : false;
+	}
+	 public boolean supprFavoris(long IdOffre) {
+		 if(favorisexist(IdOffre)) {
+			 try {
+				 Statement st;
+				 st=con.createStatement();
+				 
+				 String sql = "DELETE FROM favoris WHERE Id_Utilisateur = '"+this.IdUser+"' AND Id_offre = '"+IdOffre+"';";
+				 st.executeUpdate(sql);
+				 return true;
+				 }catch(SQLException e) {
+					 return false;
+				 }
+		 }else return false;
+	 }
+	public boolean SupprimerMessages(String emailUser) {
+		long IdUserDest = this.getIdOfEmail(emailUser);
+		try{
+	 		Statement st;
+	 		st = con.createStatement();
+	 		String sql = "delete from envoyer_messages where id_Utilisateurs_src = '"+IdUserDest+"' and id_Utilisateurs_dst = '"+this.IdUser+"'";
+	 		st.executeUpdate(sql);
+	 		return true;
+	 	}catch(SQLException e){
+	 		return false;
+	 	}
+		
+	}
+	public boolean ChangerUtilisateur(String nom,String email,String motdepasse,String tel,String Adresse) {
+		boolean b=false;
+		try {
+			String motPassChifre = cont.chiffrer(motdepasse);
+			Statement st;
+			st = con.createStatement();
+			String sql = "Update utilisateurs set Nom = '"+nom+"',Email='"+email+"',Mot_De_Passe='"+motPassChifre+"',Tel='"+tel+"',Adresse='"+Adresse+"' where Id_Utilisateur = '"+this.IdUser+"'";
+			st.executeUpdate(sql);
+			b=true;
+		 }catch(SQLException e) {
+			 b=false;
+		} 
+		return b;
+	}
+	public Offer getInfoOffer(String titre){
+		Offer offer = new Offer();
+		try {
+			Statement st;
+			st = con.createStatement();
 			ResultSet resu;
-			String sql = "select * from utilisateurs where Id_Utilisateur = '"+this.IdUser+"'";
+			String sql=null;
+			sql = "select * from offres where Id_Utilisateur = '"+this.IdUser+"' and Titre ='"+titre+"'";
 			resu = st.executeQuery(sql);
 			while(resu.next()) {
-			           user = new Utilisateur(resu.getString("Nom"),resu.getString("Email"),resu.getString("Mot_de_passe"),resu.getString("Tel"),resu.getString("Adresse"));
-			}	
-		}catch(SQLException e) {
-			             return user;
+				offer = new Offer(resu.getLong("Id_Offer"),resu.getString("Titre"),resu.getFloat("prix"),resu.getString("Date_depart"),resu.getString("Heure_depart"),resu.getString("Ville_depart"),resu.getString("Ville_arrive"),resu.getInt("Nbr_Places"),resu.getString("bagage"));
+			}
+			
+			}catch(SQLException e) {
+			offer = null;
 		}
-		return user;
+		return offer;
+	}
+	public boolean ModdifierOffer(long id_offre,String titre ,float prix ,String date_depart ,String heure_depart,String ville_depart,String ville_arrive, int nbr_places, String bagage) {
+		try {
+			Statement st;
+			st = con.createStatement();
+			String sql = "Update offres set Titre ='"+titre+"',prix='"+prix+"',Date_depart='"+date_depart+"',Heure_depart='"+heure_depart+"',Ville_depart='"+ville_depart+"',Ville_arrive='"+ville_arrive+"',Nbr_places='"+nbr_places+"',Bagage='"+bagage+"' where Id_offer ='"+id_offre+"'" ;
+			st.executeUpdate(sql);
+			return true;
+		
+		}catch(SQLException e) {
+			return false;
+		}
+		}
+	public String GetNewMoPasse() {
+		String NewPass = "";
+		long nbr = (long) Math.floor(Math.random()*Math.ceil(Math.random()*1000));
+		for(int i=0;i<3;i++) {
+			NewPass = NewPass + nbr;
+		}
+		return NewPass;
+	}
+	public String getTitreOfferById(long id_offer) {
+		String titre="";
+		try {
+			Statement st;
+			st = con.createStatement();
+			ResultSet resu;
+			String sql=null;
+			sql = "select Titre from offres where  Id_offer ='"+id_offer+"'";
+			resu = st.executeQuery(sql);
+			while(resu.next()) {
+				titre = resu.getString("Titre");
+			}
+			
+			}catch(SQLException e) {
+				titre="";
+			}
+		return titre;
+	}
+	public String getNomUtilById(long id_utilisateur) {
+		String nom="";
+		try {
+			Statement st;
+			st = con.createStatement();
+			ResultSet resu;
+			String sql=null;
+			sql = "select Nom from utilisateurs where  Id_Utilisateur ='"+id_utilisateur+"'";
+			resu = st.executeQuery(sql);
+			while(resu.next()) {
+				nom = resu.getString("Nom");
+			}
+			
+			}catch(SQLException e) {
+				e.printStackTrace();
+			}
+		return nom;
+	}
+	public ResultSet getDemandesRecoit() {
+		try {
+			Statement st;
+			st = con.createStatement();
+			ResultSet resu;
+			String sql=null;
+			sql = "select * from reservations where  Id_Utilisateur !='"+this.IdUser+"'";
+			resu = st.executeQuery(sql);
+			return resu;
+			
+			}catch(SQLException e) {
+				return null;
+			}
+	}
+	public boolean SuppDemRec(long id_utilisateur , long id_offre) {
+		Statement st;
+		try {
+			st = con.createStatement();
+			String sql=null;
+			sql = "delete from reservations where Id_Utilisateur ='"+id_utilisateur+"' and Id_offer ='"+id_offre+"'";
+			st.executeUpdate(sql);
+			return true;
+		} catch (SQLException e) {
+			return false;
+		}
+		
+	}
+	public boolean SetNewPassword(long IdUtilisateur) {
+		boolean b=false;
+		try {
+			String motPassChifre = cont.chiffrer(this.GetNewMoPasse());
+			Statement st;
+			st = con.createStatement();
+			String sql = "Update utilisateurs set Mot_De_Passe='"+motPassChifre+"' where Id_Utilisateur = '"+IdUtilisateur+"'";
+			st.executeUpdate(sql);
+			b=true;
+		 }catch(SQLException e) {
+			 b=false;
+		} 
+		return b;
+	}
+	public String GetMyPassword(long idusr) {
+		String password = "";
+		try {
+			Statement st;
+			st = con.createStatement();
+			ResultSet resu;
+			String sql=null;
+			sql = "select * from utilisateurs where Id_Utilisateur = '"+idusr+"'";
+			resu = st.executeQuery(sql);
+			while(resu.next()) {
+				password = cont.dechiffrer(resu.getString("Mot_de_passe"));
+			}
+		}catch(SQLException e) {
+			password = null;
+		}
+		return password;
 	}
 }
