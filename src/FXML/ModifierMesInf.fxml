@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
+  <children>
+    <AnchorPane fx:id="RegisterBackground" maxHeight="-1.0" maxWidth="-1.0" prefHeight="457.0" prefWidth="640.0" style="-fx-background-color: #00ffa3;" VBox.vgrow="ALWAYS">
+         <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="46.0" prefWidth="381.0" style="-fx-font-size: 17pt; -fx-font-family: monospace;" text="Modifier Mes Informations" textFill="WHITE" />
+            <Label layoutX="14.0" layoutY="93.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Votre Nom :" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="509.0" />
+            <TextField fx:id="nomAdm" layoutX="227.0" layoutY="96.0" prefHeight="32.0" prefWidth="329.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="84.0" />
+            <TextField fx:id="emailAdm" layoutX="227.0" layoutY="142.0" prefHeight="32.0" prefWidth="329.0" promptText="youremail@gmail.com" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="84.0" />
+            <Label layoutX="14.0" layoutY="137.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Votre Email :" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="509.0" />
+            <Label layoutX="14.0" layoutY="185.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Mot de Passe :" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="509.0" />
+            <Label layoutX="14.0" layoutY="226.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Télephone:" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="509.0" />
+            <Label layoutX="14.0" layoutY="272.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Adresse:" textFill="WHITE" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="509.0" />
+            <TextField fx:id="telephoneAdm" layoutX="227.0" layoutY="225.0" prefHeight="32.0" prefWidth="329.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="84.0" />
+            <TextField fx:id="adresseAdm" layoutX="227.0" layoutY="271.0" prefHeight="32.0" prefWidth="329.0" style="-fx-font-size: 13pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="84.0" />
+            <Button fx:id="ModifierMesInf" layoutX="205.0" layoutY="333.0" mnemonicParsing="false" onAction="#ModifierMesInformation" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: blue; -fx-font-size: 13pt;" text="Modifier" textFill="WHITE" AnchorPane.leftAnchor="205.0" />
+            <PasswordField fx:id="MotDePasseAdm" layoutX="227.0" layoutY="184.0" prefHeight="32.0" prefWidth="329.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="84.0" />
+            <Button fx:id="exitButton" layoutX="434.0" layoutY="333.0" mnemonicParsing="false" onAction="#ExitAdm" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: blue; -fx-font-size: 13pt;" text="Sortie" textFill="WHITE" AnchorPane.rightAnchor="63.0" />
+            <ImageView fx:id="eyeIcon" fitHeight="30.0" fitWidth="31.0" layoutX="525.0" layoutY="185.0" onMouseClicked="#ShowPassword" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="85.43478202819824">
+               <image>
+                  <Image url="@../../Images/eyeIcon.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="eyeIcon1" fitHeight="30.0" fitWidth="42.0" layoutX="525.0" layoutY="185.0" onMouseClicked="#ShowPassword" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="85.43478202819824">
+               <image>
+                  <Image url="@../../Images/eyeIcon.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="MotDePasseAdm1" layoutX="227.0" layoutY="184.0" prefHeight="32.0" prefWidth="329.0" style="-fx-font-size: 13pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="227.0" AnchorPane.rightAnchor="84.0" />
+            <ImageView fx:id="eyeIcon1" fitHeight="30.0" fitWidth="29.0" layoutX="526.0" layoutY="185.0" onMouseClicked="#DShowPassword" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="85.43478202819824">
+               <image>
+                  <Image url="@../../Images/eyeIcon1.png" />
+               </image>
+            </ImageView>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

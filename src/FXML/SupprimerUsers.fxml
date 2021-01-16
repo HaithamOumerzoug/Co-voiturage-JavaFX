@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label layoutX="51.0" layoutY="31.0" prefHeight="40.0" prefWidth="346.0" style="-fx-font-size: 14pt; -fx-font-family: monospace; -fx-font-weight: bold;" text="Supprimer L'utilisateur :" textFill="#00ffa3" />
+            <TextField fx:id="EmailUserDel" layoutX="51.0" layoutY="110.0" prefHeight="40.0" prefWidth="381.0" promptText="Entrer l'email de l'utilisateur" style="-fx-font-size: 14pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="208.0" />
+            <Button layoutX="318.0" layoutY="200.0" mnemonicParsing="false" onAction="#SupprimerUtilisateurs" prefHeight="40.0" prefWidth="114.0" style="-fx-font-family: monospace; -fx-font-weight: bold; -fx-background-color: blue; -fx-font-size: 12pt;" text="Supprimer" textFill="WHITE" AnchorPane.rightAnchor="208.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AdminController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="439.0" prefWidth="691.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TableView fx:id="tableUser" layoutY="110.0" prefHeight="434.0" prefWidth="906.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="IdUser" prefWidth="75.0" text="ID " />
+                  <TableColumn fx:id="NomUser" prefWidth="260.0" text="Nom" />
+                  <TableColumn fx:id="EmailUser" minWidth="0.0" prefWidth="188.0" text="Email" />
+                  <TableColumn fx:id="TelUser" minWidth="1.0" prefWidth="198.0" text="Tel " />
+                  <TableColumn fx:id="AdresseUser" minWidth="0.0" prefWidth="184.0" text="Adresse" />
+               </columns>
+            </TableView>
+            <ImageView fx:id="resetUser" fitHeight="51.0" fitWidth="51.0" layoutX="14.0" layoutY="46.0" onMouseClicked="#afficherUtilisateurs" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/reset.png" />
+               </image>
+               
+            </ImageView>
+            <ImageView fx:id="exitUser" fitHeight="51.0" fitWidth="51.0" layoutX="255.0" layoutY="46.0" onMouseClicked="#exitToIntrAdm" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/exit.png" />
+               </image>
+               
+            </ImageView>
+            <Label layoutX="6.0" layoutY="6.0" prefHeight="31.0" prefWidth="361.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold;" text="Gestion des Utilisateurs:" textFill="#00ffa3" />
+            <ImageView fx:id="DeleteUser" fitHeight="51.0" fitWidth="60.0" layoutX="110.0" layoutY="46.0" onMouseClicked="#SupprimerUtilisateurs" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/supprimer.png" />
+               </image>
+               
+            </ImageView>
+            <ImageView fx:id="ResetPassword" fitHeight="51.0" fitWidth="51.0" layoutX="162.0" layoutY="46.0" onMouseClicked="#SetNewPassword" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/ResetPassword.png" />
+               </image>
+            </ImageView>
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

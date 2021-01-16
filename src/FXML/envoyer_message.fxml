@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label layoutX="51.0" layoutY="31.0" prefHeight="40.0" prefWidth="346.0" style="-fx-font-size: 14pt; -fx-font-family: monospace; -fx-font-weight: bold;" text="Envoyer un message :" textFill="#00ffa3" />
+            <Button fx:id="EnvoyerMessage" layoutX="397.0" layoutY="324.0" mnemonicParsing="false" onAction="#EnvoyerMessage" prefHeight="40.0" prefWidth="114.0" style="-fx-font-family: monospace; -fx-font-weight: bold; -fx-background-color: blue; -fx-font-size: 12pt;" text="Envoyer" textFill="WHITE" AnchorPane.rightAnchor="129.0" />
+            <TextArea fx:id="MessageEnv" layoutX="93.0" layoutY="145.0" prefHeight="156.0" prefWidth="418.0" promptText="entrer votre message" style="-fx-border-color: #00ffa3; -fx-font-size: 13pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="129.0" />
+            <TextField fx:id="EmailDest" layoutX="93.0" layoutY="88.0" prefHeight="40.0" prefWidth="418.0" promptText="l'email de destination" style="-fx-border-color: #00ffa3; -fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="129.0" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>

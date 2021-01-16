@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+   <children>
+      <AnchorPane fx:id="RegisterBackground" maxHeight="-1.0" maxWidth="-1.0" prefHeight="457.0" prefWidth="640.0" style="-fx-background-color: #00ffa3;" VBox.vgrow="ALWAYS">
+         <children>
+            <Label alignment="CENTER" layoutX="46.0" layoutY="14.0" prefHeight="46.0" prefWidth="381.0" style="-fx-font-size: 17pt; -fx-font-family: monospace;" text="Modifier Mes Informations" textFill="WHITE" />
+            <Label layoutX="66.0" layoutY="95.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Votre Nom :" textFill="WHITE" />
+            <TextField fx:id="nomUsr" layoutX="279.0" layoutY="98.0" prefHeight="32.0" prefWidth="296.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="65.0" />
+            <TextField fx:id="emailUsr" layoutX="279.0" layoutY="144.0" prefHeight="32.0" prefWidth="296.0" promptText="youremail@gmail.com" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="65.0" />
+            <Label layoutX="66.0" layoutY="139.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Votre Email :" textFill="WHITE" />
+            <Label layoutX="66.0" layoutY="187.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Mot de Passe :" textFill="WHITE" />
+            <Label layoutX="66.0" layoutY="228.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Télephone:" textFill="WHITE" />
+            <Label layoutX="66.0" layoutY="274.0" prefHeight="30.0" prefWidth="117.0" style="-fx-font-size: 12pt;" text="Adresse:" textFill="WHITE" />
+            <TextField fx:id="telephoneUsr" layoutX="279.0" layoutY="227.0" prefHeight="32.0" prefWidth="296.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="65.0" />
+            <TextField fx:id="adresseUsr" layoutX="279.0" layoutY="273.0" prefHeight="32.0" prefWidth="296.0" style="-fx-font-size: 13pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="65.0" />
+            <Button fx:id="ModifierMesInf" layoutX="205.0" layoutY="333.0" mnemonicParsing="false" onAction="#ModifierMesInformationUsr" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #007E33; -fx-font-size: 13pt;" text="Modifier" textFill="WHITE" />
+            <PasswordField fx:id="MotDePasseUsr" layoutX="279.0" layoutY="186.0" prefHeight="32.0" prefWidth="296.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="65.0" />
+            <Button fx:id="exitButton" layoutX="434.0" layoutY="333.0" mnemonicParsing="false" onAction="#toProfile" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: red; -fx-font-size: 13pt;" text="Sortie" textFill="WHITE" />
+            <ImageView fx:id="Showeye" fitHeight="30.0" fitWidth="39.0" layoutX="538.0" layoutY="187.0" onMouseClicked="#ShowPasswordUserModify" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="72.0">
+               <image>
+                  <Image url="@../../Images/eyeIcon.png" />
+               </image>
+            </ImageView>
+            <TextField fx:id="MotDePasseUser1" layoutX="279.0" layoutY="186.0" prefHeight="32.0" prefWidth="296.0" style="-fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="279.0" AnchorPane.rightAnchor="65.0" />
+            <ImageView fx:id="HideEye" fitHeight="32.0" fitWidth="43.0" layoutX="532.0" layoutY="187.0" onMouseClicked="#HidePasswordModifyUser" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="72.0">
+               <image>
+                  <Image url="@../../Images/eyeIcon1.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
