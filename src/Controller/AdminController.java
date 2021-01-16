@@ -1,14 +1,19 @@
 package Controller;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;//Si vous utilisez Linux
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Optional;
 import java.util.ResourceBundle;
-//import com.mysql.jdbc.PreparedStatement;
+
+//import com.mysql.jdbc.PreparedStatement;//Si vous utilisez Windows
 import application.Administrateur;
 import application.ConnexionMysql;
 import application.Offer;
 import application.Utilisateur;
+import application.SendEmail;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +23,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,23 +31,26 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import javafx.scene.control.Label;
 public class AdminController implements Initializable {
-    @FXML private Button GestionnaireOffres;
-    @FXML private Button GestionnaireUsers;
-    @FXML private Button exitButton;
+	@FXML private Button GestionnaireOffres;
+	@FXML private Button GestionnaireUsers;
+	@FXML private Button exitButton;
     @FXML private Button DeconnexionAdm;
     @FXML private Button ModifierMesInf;
     @FXML private ImageView exitUser;
     @FXML private ImageView resetUser;
-    @FXML private ImageView DeleteUser;
+    @FXML private ImageView eyeIcon;
+    @FXML private ImageView eyeIcon1;
     @FXML private TextField adresseAdm;
     @FXML private TextField telephoneAdm;
     @FXML private TextField nomAdm;
+    @FXML private ImageView ResetPassword;
     @FXML private TextField emailAdm;  
     @FXML private TextField MotDePasseAdm;
+    @FXML private TextField MotDePasseAdm1;
     @FXML private TableView<Utilisateur> tableUser;
     @FXML private TableView<Offer> tableOffre;
     @FXML private TableColumn<Utilisateur,String> AdresseUser;
@@ -56,10 +65,10 @@ public class AdminController implements Initializable {
     @FXML private TableColumn<Offer,String> Ville_arrive;
     @FXML private TableColumn<Offer,Integer> NbrPlaceOffre;
     @FXML private TableColumn<Offer,Long> IdUser2;
-    @FXML private TextField EmailUserDel;
-    @FXML private TextField IdOffreValue;
     @FXML private Label BonAdm;
+    @FXML private ImageView DeleteUser;
     @FXML private AnchorPane RegisterBackground;
+    @FXML private boolean ShowPasse = false;
     @FXML
     public void toModifierMesInf() throws IOException {
     	DeconnexionAdm.getScene().getWindow().hide();
@@ -76,20 +85,30 @@ public class AdminController implements Initializable {
     @FXML
     public void ModifierMesInformation() {
     	String reg="^$";
+    	String regEmail = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
+    	String regTel="^06[0-9]+$";
     	if(nomAdm.getText().matches(reg) || emailAdm.getText().matches(reg) || MotDePasseAdm.getText().matches(reg) || telephoneAdm.getText().matches(reg) || adresseAdm.getText().matches(reg)) {
-    		Alert dialog = new Alert(AlertType.INFORMATION);
+    		Alert dialog = new Alert(AlertType.ERROR);
     		dialog.setTitle("Attention.");
     		dialog.setContentText("l'un des champs est vide !!");
     		dialog.showAndWait();
-    	}else if(!emailAdm.getText().substring(emailAdm.getText().length()-10, emailAdm.getText().length()).equals("@gmail.com")) {
-	    	Alert dialog = new Alert(AlertType.INFORMATION);
-	    	dialog.setTitle("EMAIL DANS L'EMAIL.");
+    	}else if(!emailAdm.getText().matches(regEmail)) {
+	    	Alert dialog = new Alert(AlertType.ERROR);
+	    	dialog.setTitle("ERREUR DANS L'EMAIL.");
 	    	dialog.setHeaderText("Erreur de syntaxe.");
 	    	dialog.setContentText("synatxe de l'email est invalide !!");
 	    	dialog.showAndWait();
-	    }else {
-	    		Administrateur adm = new Administrateur(nomAdm.getText(),emailAdm.getText(),MotDePasseAdm.getText(),telephoneAdm.getText(),adresseAdm.getText());
-	    		if(adm.ChangerAdministrateurs()) {
+	    }else if(!telephoneAdm.getText().matches(regTel)){
+	    	Alert dialog = new Alert(AlertType.ERROR);
+	    	dialog.setTitle("ERREUR DANS TELEPHONE.");
+	    	dialog.setHeaderText("Erreur de syntaxe.");
+	    	dialog.setContentText("synatxe de numéro de télephone est invalide !!");
+	    	dialog.showAndWait();
+	    }else{
+	    	    Administrateur adm = null;
+	    	    if(!this.ShowPasse)  adm = new Administrateur(nomAdm.getText(),emailAdm.getText(),MotDePasseAdm.getText(),telephoneAdm.getText(),adresseAdm.getText());
+	    	    else    adm = new Administrateur(nomAdm.getText(),emailAdm.getText(),MotDePasseAdm1.getText(),telephoneAdm.getText(),adresseAdm.getText()); 
+	    	    if(adm.ChangerAdministrateurs()) {
 	    			Alert dialog = new Alert(AlertType.INFORMATION);
 	        		dialog.setTitle("vous étes Modifier vous informations avec succes");
 	        		dialog.setContentText("Les information sont bien enrgistrer:)");
@@ -102,11 +121,59 @@ public class AdminController implements Initializable {
 	    		}
 	    	}
     }
+    @FXML
+    public void SetNewPassword() {
+    	Utilisateur user = this.tableUser.getSelectionModel().getSelectedItem();
+    	if(user != null) {
+    		Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation de suppression ");
+			alert.setContentText("Voulez-vous vraiment rénisialiser le mot de passe de l'utilisateur "+user.getNom());
+			Optional<ButtonType> result = alert.showAndWait();
+		    if(result.get() == ButtonType.OK) {
+		    	if(user.SetNewPassword(user.getId_Utilisateur()) && SendEmail.Send(user.getEmail(),"le noveau mot de passe est : "+user.GetMyPassword(user.getId_Utilisateur())+"Réinitialiser du mot de passe","le nouveau mot de passe",user.getNomUtilById(user.IdUser))) {
+		    		Alert dialog = new Alert(AlertType.INFORMATION);
+	        		 dialog.setTitle("Succés !");
+	        		 dialog.setContentText("le neveau mot de passe de l'utilisateur est bien enregistrer et l'utilisateur recevoire le mot de passe !");
+	        		 dialog.showAndWait();
+	    		}else {
+	    			 Alert dialog = new Alert(AlertType.INFORMATION);
+	        		 dialog.setTitle("Pas de Connexion ");
+	        		 dialog.setContentText("vous les problémes de connexion .");
+	        		 dialog.showAndWait();
+	    		}
+		   }
+    	}else {
+    		 Alert dialog = new Alert(AlertType.INFORMATION);
+    		 dialog.setTitle("Erreur");
+    		 dialog.setContentText("Aucune utilisateur séléctionnée");
+    		 dialog.showAndWait(); 
+    	}
+    }
+    @FXML
+    public void ShowPassword() {
+    	this.MotDePasseAdm.setVisible(false);
+    	this.eyeIcon.setVisible(false);
+    	this.MotDePasseAdm1.setVisible(true);
+    	this.eyeIcon1.setVisible(true);
+    	this.ShowPasse = true;
+    	MotDePasseAdm1.setText(MotDePasseAdm.getText());
+    }
+    @FXML
+    public void DShowPassword() {
+    	this.MotDePasseAdm.setVisible(true);
+    	this.eyeIcon.setVisible(true);
+    	this.MotDePasseAdm1.setVisible(false);
+    	this.eyeIcon1.setVisible(false);
+    	this.ShowPasse = false;
+    	MotDePasseAdm.setText(MotDePasseAdm1.getText());
+    }
+    @FXML
     public void ExitAdm() throws IOException {
     	LoginController loginController = new LoginController();
     	ModifierMesInf.getScene().getWindow().hide();
     	loginController.ChargerInterAdm();
     }
+    @FXML
     public void Deconnexion() throws IOException {
     	LoginController loginController = new LoginController();
     	ModifierMesInf.getScene().getWindow().hide();
@@ -114,13 +181,14 @@ public class AdminController implements Initializable {
     	GestionnaireOffres.getScene().getWindow().hide();
     	loginController.ChargerInterLogin();
     }
+    @FXML
     public void toGestionnaireUsers() throws IOException {
     	DeconnexionAdm.getScene().getWindow().hide();
     	GestionnaireOffres.getScene().getWindow().hide();
     	ModifierMesInf.getScene().getWindow().hide();
     	Stage gestionnaire = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/GestionnaireUtilisateur.fxml"));
-    	Scene scene = new Scene(root);
+    	Scene scene = new Scene(root,850,500);
     	gestionnaire.setTitle("Gestionnaire");
 		gestionnaire.getIcons().add(new Image("file:../../Images/icon.png"));
     	gestionnaire.setScene(scene);
@@ -133,7 +201,7 @@ public class AdminController implements Initializable {
     	ModifierMesInf.getScene().getWindow().hide();
     	Stage gestionnaire = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/GestionnaireOffres.fxml"));
-    	Scene scene = new Scene(root);
+    	Scene scene = new Scene(root,840,500);
     	gestionnaire.setTitle("Gestionnaire");
 		gestionnaire.getIcons().add(new Image("file:../../Images/icon.png"));
     	gestionnaire.setScene(scene);
@@ -141,32 +209,42 @@ public class AdminController implements Initializable {
     }
     @FXML
     public void SupprimerUtilisateurs() {
-    	Administrateur admin = new Administrateur();
-    	if(admin.Supprimer_Utilisateur(this.EmailUserDel.getText())) {
-    		Alert dialog = new Alert(AlertType.INFORMATION);
-    		dialog.setTitle("");
-    		dialog.setContentText("L'utilisateur est supprimé avec succes)");
-    		dialog.showAndWait();
+    	Utilisateur user = this.tableUser.getSelectionModel().getSelectedItem();
+    	if(user != null) {
+    		Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation de suppression ");
+			alert.setContentText("Voulez-vous vraiment supprimer l'utilisateur  "+user.getNom());
+			Optional<ButtonType> result = alert.showAndWait();
+		    if(result.get() == ButtonType.OK) {
+			   if(LoginController.admin.Supprimer_Utilisateur(user.getEmail())) {
+				 this.afficherUtilisateurs();
+			   }
+		   }
     	}else {
-    		Alert dialog = new Alert(AlertType.ERROR);
-    		dialog.setTitle("");
-    		dialog.setContentText("ce utilisateur n'exit pas");
-    		dialog.showAndWait();
+    		Alert dialog = new Alert(AlertType.INFORMATION);
+   		    dialog.setTitle("Erreur");
+   		    dialog.setContentText("Aucune utilisateur séléctionnée");
+   		    dialog.showAndWait(); 
     	}
     }
     @FXML
     public void SupprimerOffre() {
-    	LoginController loginController = new LoginController();
-    	if(loginController.admin.Supprimer_Offer(Long.parseLong(this.IdOffreValue.getText()))) {
-    		Alert dialog = new Alert(AlertType.INFORMATION);
-    		dialog.setTitle("");
-    		dialog.setContentText("L'offre il  est supprimé avec succes)");
-    		dialog.showAndWait();
+    	Offer offer = this.tableOffre.getSelectionModel().getSelectedItem();
+    	if(offer != null) {
+    		Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Confirmation de suppression ");
+			alert.setContentText("Voulez-vous vraiment supprimer l'offre  "+offer.getTitre());
+			Optional<ButtonType> result = alert.showAndWait();
+		   if(result.get() == ButtonType.OK) {
+			  if(LoginController.admin.Supprimer_Offer(offer.getId_offer())) {
+				 this.afficherOffres();
+			  }
+		   }
     	}else {
-    		Alert dialog = new Alert(AlertType.ERROR);
-    		dialog.setTitle("");
-    		dialog.setContentText("cette offre n'exit pas");
-    		dialog.showAndWait();
+    		Alert dialog = new Alert(AlertType.INFORMATION);
+   		    dialog.setTitle("Erreur");
+   		    dialog.setContentText("Aucune offre séléctionnée");
+   		    dialog.showAndWait();
     	}
     }
     @FXML
@@ -178,7 +256,7 @@ public class AdminController implements Initializable {
     	try {
     		ConnexionMysql cont = new ConnexionMysql();
         	Connection con = cont.ConnDB();
-			String sql = "SELECT  *  FROM Utilisateurs ";
+			String sql = "SELECT  *  FROM utilisateurs ";
 			PreparedStatement stat = (PreparedStatement) con.prepareStatement(sql);
 			ResultSet resu = stat.executeQuery();
 			while(resu.next()) {
@@ -206,7 +284,7 @@ public class AdminController implements Initializable {
     	try {
     		ConnexionMysql cont = new ConnexionMysql();
         	Connection con = cont.ConnDB();
-			String sql = "SELECT  *  FROM Offres ";
+			String sql = "SELECT  *  FROM offres ";
 			PreparedStatement stat = (PreparedStatement) con.prepareStatement(sql);
 			ResultSet resu = stat.executeQuery();
 			while(resu.next()) {
@@ -233,41 +311,21 @@ public class AdminController implements Initializable {
     	DeleteUser.getScene().getWindow().hide();
     	loginController.ChargerInterAdm();
     }
-    @FXML
-    public void toSupprimerUser() throws IOException {
-    	Stage gestionnaire = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("/FXML/SupprimerUsers.fxml"));
-    	Scene scene = new Scene(root);
-    	gestionnaire.setTitle("Supprimer les Utilisateurs");
-		gestionnaire.getIcons().add(new Image("file:../../Images/icon.png"));
-    	gestionnaire.setScene(scene);
-    	gestionnaire.show();
-    }
-    @FXML
-    public void toSupprimerOffres() throws IOException {
-    	Stage gestionnaire = new Stage();
-    	Parent root = FXMLLoader.load(getClass().getResource("/FXML/SupprimerOffres.fxml"));
-    	Scene scene = new Scene(root);
-    	gestionnaire.setTitle("supprimer les offres");
-		gestionnaire.getIcons().add(new Image("file:../../Images/icon.png"));
-    	gestionnaire.setScene(scene);
-    	gestionnaire.show();
-    }
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(BonAdm != null) {
-			LoginController loginController = new LoginController();
-			BonAdm.setText("Bonjour "+loginController.admin.getMesInf().get(0).getNom());
+			BonAdm.setText("Bienvenu "+LoginController.admin.getMesInf().get(0).getNom());
 		}
 		if(this.tableUser != null )  this.afficherUtilisateurs();
 		if(this.tableOffre != null ) this.afficherOffres();
 		if(this.RegisterBackground != null) {
-			LoginController loginController = new LoginController();
-			this.nomAdm.setText(loginController.admin.getMesInf().get(0).getNom());
-			this.emailAdm.setText(loginController.admin.getMesInf().get(0).getEmail());
-			this.MotDePasseAdm.setText(loginController.admin.getMesInf().get(0).getMot_de_passe());
-			this.telephoneAdm.setText(loginController.admin.getMesInf().get(0).getTel());
-			this.adresseAdm.setText(loginController.admin.getMesInf().get(0).getAdresse());
+			this.nomAdm.setText(LoginController.admin.getMesInf().get(0).getNom());
+			this.emailAdm.setText(LoginController.admin.getMesInf().get(0).getEmail());
+			this.MotDePasseAdm.setText(LoginController.admin.getMesInf().get(0).getMot_de_passe());
+			this.telephoneAdm.setText(LoginController.admin.getMesInf().get(0).getTel());
+			this.adresseAdm.setText(LoginController.admin.getMesInf().get(0).getAdresse());
+			this.MotDePasseAdm1.setVisible(false);
+			this.eyeIcon1.setVisible(false);
 		}
 	}
 }
