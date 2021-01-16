@@ -121,7 +121,7 @@ public class Administrateur {
 				st.executeUpdate(sql0);
 				String sql01 = "delete from reservations where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql01);
-				String sql1 = "delete from offres where Id_Utilisateur = '"+IdUser+"'";
+				String sql1 = "delete from Offres where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql1);
 				String sql11 = " delete from favoris where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql11);
@@ -157,7 +157,7 @@ public class Administrateur {
 			 String sql="select * from administrateurs";
 			 resu = st.executeQuery(sql);
 			 while(resu.next()) {
-				 MesInf.add(new Administrateur(resu.getString("Nom"),resu.getString("Email"),resu.getString("Mot_de_passe"),resu.getString("Tel"),resu.getString("Adresse")));
+				 MesInf.add(new Administrateur(resu.getString("Nom"),resu.getString("Email"),cont.dechiffrer(resu.getString("Mot_de_passe")),resu.getString("Tel"),resu.getString("Adresse")));
 			 }
 		 }catch(SQLException e) {
 			 MesInf = null;
