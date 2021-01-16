@@ -1,7 +1,8 @@
 package application;
 import java.sql.Connection;
-import java.sql.*;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 public class Offer {
 	private long Id_offer;
 	private String titre;
@@ -11,13 +12,26 @@ public class Offer {
 	private String Ville_depart;
 	private String Ville_arrive;
 	private int Nbr_places;
-	private String Bagage ="Oui";
+	private String Bagage;
 	private long Id_Utilisateur;
 	private int Id_Admin;
+	private int nbr_places_reserv;
 	public Offer() {
 		super();
 	}
 	
+	public Offer(String titre, float prix, String date_departe, String heure_depart, String ville_depart,
+			String ville_arrive, int nbr_places, String bagage) {
+		super();
+		this.titre = titre;
+		this.prix = prix;
+		Date_departe = date_departe;
+		this.heure_depart = heure_depart;
+		Ville_depart = ville_depart;
+		Ville_arrive = ville_arrive;
+		Nbr_places = nbr_places;
+		Bagage = bagage;
+	}
 	public Offer(long id_offer, String titre, float prix, String date_departe, String heure_depart, String ville_depart,
 			String ville_arrive, int nbr_places, String bagage) {
 		super();
@@ -31,6 +45,20 @@ public class Offer {
 		Nbr_places = nbr_places;
 		Bagage = bagage;
 	}
+	public Offer(long id_offer, String titre, float prix, String date_departe, String heure_depart, String ville_depart,
+			String ville_arrive, int nbr_places, String bagage,int nbr_places_reserv) {
+		super();
+		Id_offer = id_offer;
+		this.titre = titre;
+		this.prix = prix;
+		Date_departe = date_departe;
+		this.heure_depart = heure_depart;
+		Ville_depart = ville_depart;
+		Ville_arrive = ville_arrive;
+		Nbr_places = nbr_places;
+		Bagage = bagage;
+		this.nbr_places_reserv = nbr_places_reserv;
+	}
 	
 	public Offer(long id_offer, String titre, float prix, String ville_depart, String ville_arrive, int nbr_places,
 			long id_Utilisateur) {
@@ -43,6 +71,18 @@ public class Offer {
 		Nbr_places = nbr_places;
 		Id_Utilisateur = id_Utilisateur;
 	}
+	public Offer(long id_offer, String titre, float prix, String ville_depart, String ville_arrive, int nbr_places,
+			String bagage) {
+		super();
+		Id_offer = id_offer;
+		this.titre = titre;
+		this.prix = prix;
+		Ville_depart = ville_depart;
+		Ville_arrive = ville_arrive;
+		Nbr_places = nbr_places;
+		Bagage = bagage;
+	}
+
 	public long getId_offer() {
 		return Id_offer;
 	}
@@ -109,6 +149,15 @@ public class Offer {
 	public void setId_Admin(int id_Admin) {
 		Id_Admin = id_Admin;
 	}
+	
+	public int getNbr_places_reserv() {
+		return nbr_places_reserv;
+	}
+
+	public void setNbr_places_reserv(int nbr_places_reserv) {
+		this.nbr_places_reserv = nbr_places_reserv;
+	}
+
 	public int Nombre_offres() {
 		ConnexionMysql cont = new ConnexionMysql();
 		Connection con = cont.ConnDB();
@@ -117,7 +166,7 @@ public class Offer {
 			Statement st;
 			st = con.createStatement();
 			ResultSet resu;
-			String sql="select count(*) As totale from Offres";
+			String sql="select count(*) As totale from offres";
 			resu = st.executeQuery(sql);
 			while(resu.next()) {
 				nbr = resu.getInt("totale");
