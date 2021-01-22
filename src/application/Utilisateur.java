@@ -157,20 +157,6 @@ public class Utilisateur {
 		}
 		return user;
 	}
-	public boolean Changer_Mot_De_Passe(String mot_de_passe) {
-		boolean b=false;
-		try {
-			String motdepasse = cont.chiffrer(mot_de_passe);
-			Statement st;
-			st = con.createStatement();
-			String sql = "Update utilisateurs set Mot_De_Passe='"+motdepasse+"'";
-			st.executeUpdate(sql);
-			b=true;
-		 }catch(SQLException e) {
-			b=false;
-		} 
-		return b;
-	}
 	public boolean AjouterOffer(String titre , float prix , String Date_depart , String Heure_depart,String Ville_depart,String Ville_arrive,int Nbr_places,String Bagage){
 		try {
 			Statement st;
@@ -254,9 +240,9 @@ public class Utilisateur {
 			}
 			if(Le_Reste != 0 && NbrDePlace <= Le_Reste) {
 				String sql1 = "Update offres set Nbr_places = '"+(Le_Reste-NbrDePlace)+"'where Id_offer ='"+IdOffres+"';";
-				String sql2 = "insert into reservations (Id_Utilisateur,Id_offer,message,Nbr_places) values ('"+this.IdUser+"','"+IdOffres+"','"+message+"','"+NbrDePlace+"');";
-				st.executeUpdate(sql1);
+				String sql2 = "insert into reservations ( Id_Utilisateur,Id_offer,message,Nbr_places ) values ('"+this.IdUser+"','"+IdOffres+"','"+message+"','"+NbrDePlace+"');";
 				st.executeUpdate(sql2);
+				st.executeUpdate(sql1);
 				nbr = 1;
 			}else nbr = 0;
 		}catch(SQLException e) {
@@ -465,24 +451,6 @@ public class Utilisateur {
 		}
 		return NewPass;
 	}
-	public String getTitreOfferById(long id_offer) {
-		String titre="";
-		try {
-			Statement st;
-			st = con.createStatement();
-			ResultSet resu;
-			String sql=null;
-			sql = "select Titre from offres where  Id_offer ='"+id_offer+"'";
-			resu = st.executeQuery(sql);
-			while(resu.next()) {
-				titre = resu.getString("Titre");
-			}
-			
-			}catch(SQLException e) {
-				titre="";
-			}
-		return titre;
-	}
 	public String getNomUtilById(long id_utilisateur) {
 		String nom="";
 		try {
@@ -497,7 +465,7 @@ public class Utilisateur {
 			}
 			
 			}catch(SQLException e) {
-				e.printStackTrace();
+				nom="";
 			}
 		return nom;
 	}
@@ -527,6 +495,24 @@ public class Utilisateur {
 			return false;
 		}
 		
+	}
+	public String getTitreOfferById(long id_offer) {
+		String titre="";
+		try {
+			Statement st;
+			st = con.createStatement();
+			ResultSet resu;
+			String sql=null;
+			sql = "select Titre from offres where  Id_offer ='"+id_offer+"'";
+			resu = st.executeQuery(sql);
+			while(resu.next()) {
+				titre = resu.getString("Titre");
+			}
+			
+			}catch(SQLException e) {
+				titre="";
+			}
+		return titre;
 	}
 	public boolean SetNewPassword(long IdUtilisateur) {
 		boolean b=false;
