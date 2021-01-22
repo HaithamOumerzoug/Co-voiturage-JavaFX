@@ -9,7 +9,7 @@ Aujourd’hui la plupart des gens préfère de voyager par covoiturage, c'est-à
 1. Avoir de la compagnie lors de voyage     
 1. La lutte contre la pollution et à la préservation des ressources naturelle.
 
-## Inerface dde l'application
+## Inerface de l'application
 <p align="left">
-  <img alt="" src="Interface/iterfaceLogin.png" width="250" height="200">
+  <img alt="" src="interface/IterfaceLogin.png" width="250" height="200">
 </p>
