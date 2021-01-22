@@ -1,58 +1,53 @@
 package Controller;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;//Si vous utilisez Linux
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Optional;
-import java.util.ResourceBundle;
-
-//import com.mysql.jdbc.PreparedStatement;//Si vous utilisez Windows
-import application.Administrateur;
-import application.ConnexionMysql;
-import application.Offer;
-import application.Utilisateur;
-import application.SendEmail;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import java.sql.*;
+import java.util.*;
+//import com.mysql.jdbc.PreparedStatement;
+import application.*;
+import javafx.collections.*;
+import javafx.fxml.*;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.scene.control.Label;
+
 public class AdminController implements Initializable {
+	//Les attributs
+	@FXML private boolean ShowPasse = false;
+	
+	//Button
 	@FXML private Button GestionnaireOffres;
 	@FXML private Button GestionnaireUsers;
 	@FXML private Button exitButton;
     @FXML private Button DeconnexionAdm;
     @FXML private Button ModifierMesInf;
+    
+    //ImageView
     @FXML private ImageView exitUser;
     @FXML private ImageView resetUser;
     @FXML private ImageView eyeIcon;
     @FXML private ImageView eyeIcon1;
+    @FXML private ImageView DeleteUser;
+    @FXML private ImageView ResetPassword;
+    
+    //TextField
     @FXML private TextField adresseAdm;
     @FXML private TextField telephoneAdm;
     @FXML private TextField nomAdm;
-    @FXML private ImageView ResetPassword;
     @FXML private TextField emailAdm;  
     @FXML private TextField MotDePasseAdm;
     @FXML private TextField MotDePasseAdm1;
+    
+    //TableView
     @FXML private TableView<Utilisateur> tableUser;
     @FXML private TableView<Offer> tableOffre;
+    
+    //TableColumn
     @FXML private TableColumn<Utilisateur,String> AdresseUser;
     @FXML private TableColumn<Utilisateur,String> EmailUser;
     @FXML private TableColumn<Utilisateur, String> TelUser;
@@ -65,10 +60,13 @@ public class AdminController implements Initializable {
     @FXML private TableColumn<Offer,String> Ville_arrive;
     @FXML private TableColumn<Offer,Integer> NbrPlaceOffre;
     @FXML private TableColumn<Offer,Long> IdUser2;
+    
+    //Label
     @FXML private Label BonAdm;
-    @FXML private ImageView DeleteUser;
+    //AnchorPane
     @FXML private AnchorPane RegisterBackground;
-    @FXML private boolean ShowPasse = false;
+    
+    //Les méthodes
     @FXML
     public void toModifierMesInf() throws IOException {
     	DeconnexionAdm.getScene().getWindow().hide();
@@ -77,7 +75,7 @@ public class AdminController implements Initializable {
     	Stage ModifierInf = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/ModifierMesInf.fxml"));
     	Scene scene = new Scene(root);
-    	ModifierInf.setTitle("Espace de l'utilisateur");
+    	ModifierInf.setTitle("Utilisateur");
 		ModifierInf.getIcons().add(new Image("file:../../Images/icon.png"));
     	ModifierInf.setScene(scene);
     	ModifierInf.show();
@@ -86,23 +84,23 @@ public class AdminController implements Initializable {
     public void ModifierMesInformation() {
     	String reg="^$";
     	String regEmail = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
-    	String regTel="^06[0-9]+$";
+    	String regTel="^0[5-7][0-9]+$";
     	if(nomAdm.getText().matches(reg) || emailAdm.getText().matches(reg) || MotDePasseAdm.getText().matches(reg) || telephoneAdm.getText().matches(reg) || adresseAdm.getText().matches(reg)) {
     		Alert dialog = new Alert(AlertType.ERROR);
-    		dialog.setTitle("Attention.");
-    		dialog.setContentText("l'un des champs est vide !!");
+    		dialog.setTitle("Attention !");
+    		dialog.setContentText("L'un des champs est vide !!");
     		dialog.showAndWait();
     	}else if(!emailAdm.getText().matches(regEmail)) {
 	    	Alert dialog = new Alert(AlertType.ERROR);
-	    	dialog.setTitle("ERREUR DANS L'EMAIL.");
-	    	dialog.setHeaderText("Erreur de syntaxe.");
-	    	dialog.setContentText("synatxe de l'email est invalide !!");
+	    	dialog.setTitle("ERREUR !");
+	    	dialog.setHeaderText("Erreur du syntaxe.");
+	    	dialog.setContentText("L'email est invalide !!");
 	    	dialog.showAndWait();
 	    }else if(!telephoneAdm.getText().matches(regTel)){
 	    	Alert dialog = new Alert(AlertType.ERROR);
-	    	dialog.setTitle("ERREUR DANS TELEPHONE.");
-	    	dialog.setHeaderText("Erreur de syntaxe.");
-	    	dialog.setContentText("synatxe de numéro de télephone est invalide !!");
+	    	dialog.setTitle("ERREUR !");
+	    	dialog.setHeaderText("Erreur du syntaxe.");
+	    	dialog.setContentText("Numéro de télephone est invalide !!");
 	    	dialog.showAndWait();
 	    }else{
 	    	    Administrateur adm = null;
@@ -110,13 +108,13 @@ public class AdminController implements Initializable {
 	    	    else    adm = new Administrateur(nomAdm.getText(),emailAdm.getText(),MotDePasseAdm1.getText(),telephoneAdm.getText(),adresseAdm.getText()); 
 	    	    if(adm.ChangerAdministrateurs()) {
 	    			Alert dialog = new Alert(AlertType.INFORMATION);
-	        		dialog.setTitle("vous étes Modifier vous informations avec succes");
-	        		dialog.setContentText("Les information sont bien enrgistrer:)");
+	        		dialog.setTitle("");
+	        		dialog.setContentText("Les informations sont bien enrgistrer :)");
 	        		dialog.showAndWait();
 	    		}else {
 	    			Alert dialog = new Alert(AlertType.ERROR);
-	        		dialog.setTitle("Erreur dans L'inscription.");
-	        		dialog.setContentText("Les information son invalide !!");
+	        		dialog.setTitle("ERREUR !");
+	        		dialog.setContentText("Les informations son invalide !!");
 	        		dialog.showAndWait();
 	    		}
 	    	}
@@ -127,13 +125,13 @@ public class AdminController implements Initializable {
     	if(user != null) {
     		Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Confirmation de suppression ");
-			alert.setContentText("Voulez-vous vraiment rénisialiser le mot de passe de l'utilisateur "+user.getNom());
+			alert.setContentText("Voulez-vous vraiment rénisialiser le mot de passe de l'utilisateur "+user.getNom()+" ?");
 			Optional<ButtonType> result = alert.showAndWait();
 		    if(result.get() == ButtonType.OK) {
-		    	if(user.SetNewPassword(user.getId_Utilisateur()) && SendEmail.Send(user.getEmail(),"le noveau mot de passe est : "+user.GetMyPassword(user.getId_Utilisateur())+"Réinitialiser du mot de passe","le nouveau mot de passe",user.getNomUtilById(user.IdUser))) {
-		    		Alert dialog = new Alert(AlertType.INFORMATION);
+		    	if(user.SetNewPassword(user.getId_Utilisateur()) && SendEmail.Send(user.getEmail()," Bonjour "+user.getNom()+" votre noveau mot de passe est : "+user.GetMyPassword(user.getId_Utilisateur())+" Svp Inistialiser le mot de passe.","le nouveau mot de passe")) {
+	    			 Alert dialog = new Alert(AlertType.INFORMATION);
 	        		 dialog.setTitle("Succés !");
-	        		 dialog.setContentText("le neveau mot de passe de l'utilisateur est bien enregistrer et l'utilisateur recevoire le mot de passe !");
+	        		 dialog.setContentText("Le nouveau mot de passe de l'utilisateur est bien enregistrer ;)");
 	        		 dialog.showAndWait();
 	    		}else {
 	    			 Alert dialog = new Alert(AlertType.INFORMATION);
@@ -188,7 +186,7 @@ public class AdminController implements Initializable {
     	ModifierMesInf.getScene().getWindow().hide();
     	Stage gestionnaire = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/GestionnaireUtilisateur.fxml"));
-    	Scene scene = new Scene(root,850,500);
+    	Scene scene = new Scene(root);
     	gestionnaire.setTitle("Gestionnaire");
 		gestionnaire.getIcons().add(new Image("file:../../Images/icon.png"));
     	gestionnaire.setScene(scene);
@@ -201,7 +199,7 @@ public class AdminController implements Initializable {
     	ModifierMesInf.getScene().getWindow().hide();
     	Stage gestionnaire = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/GestionnaireOffres.fxml"));
-    	Scene scene = new Scene(root,840,500);
+    	Scene scene = new Scene(root);
     	gestionnaire.setTitle("Gestionnaire");
 		gestionnaire.getIcons().add(new Image("file:../../Images/icon.png"));
     	gestionnaire.setScene(scene);
@@ -213,7 +211,7 @@ public class AdminController implements Initializable {
     	if(user != null) {
     		Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Confirmation de suppression ");
-			alert.setContentText("Voulez-vous vraiment supprimer l'utilisateur  "+user.getNom());
+			alert.setContentText("Voulez-vous vraiment supprimer l'utilisateur  "+user.getNom()+" ?");
 			Optional<ButtonType> result = alert.showAndWait();
 		    if(result.get() == ButtonType.OK) {
 			   if(LoginController.admin.Supprimer_Utilisateur(user.getEmail())) {
@@ -233,7 +231,7 @@ public class AdminController implements Initializable {
     	if(offer != null) {
     		Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("Confirmation de suppression ");
-			alert.setContentText("Voulez-vous vraiment supprimer l'offre  "+offer.getTitre());
+			alert.setContentText("Voulez-vous vraiment supprimer l'offre  "+offer.getTitre()+" ?");
 			Optional<ButtonType> result = alert.showAndWait();
 		   if(result.get() == ButtonType.OK) {
 			  if(LoginController.admin.Supprimer_Offer(offer.getId_offer())) {
@@ -265,7 +263,7 @@ public class AdminController implements Initializable {
 		}catch(SQLException e) {
 			Alert dialog = new Alert(AlertType.INFORMATION);
     		dialog.setTitle("");
-    		dialog.setContentText("probléme de connexion à la base de données");
+    		dialog.setContentText("Problème detecté !");
     		dialog.showAndWait();
 		}
     	IdUser.setCellValueFactory(new PropertyValueFactory<Utilisateur,Long>("Id_Utilisateur"));
@@ -273,6 +271,10 @@ public class AdminController implements Initializable {
     	EmailUser.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("email"));
     	TelUser.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("Tel"));
     	AdresseUser.setCellValueFactory(new PropertyValueFactory<Utilisateur,String>("Adresse"));
+    	Tooltip.install(this.resetUser, new Tooltip("Actualiser"));
+    	Tooltip.install(this.DeleteUser, new Tooltip("Supprimer"));
+    	Tooltip.install(this.exitUser, new Tooltip("Sortir"));
+    	Tooltip.install(this.ResetPassword, new Tooltip("Réinitialiser mot de passe"));
     	tableUser.setItems(dataUser);
     }
     @FXML
@@ -293,7 +295,7 @@ public class AdminController implements Initializable {
 		}catch(SQLException e) {
 			Alert dialog = new Alert(AlertType.INFORMATION);
     		dialog.setTitle("");
-    		dialog.setContentText("probléme de connexion à la base de données");
+    		dialog.setContentText("Problème detecté !");
     		dialog.showAndWait();
 		}
     	this.IdOffre.setCellValueFactory(new PropertyValueFactory<Offer,Long>("Id_offer"));
@@ -303,6 +305,11 @@ public class AdminController implements Initializable {
     	this.PrixOffre.setCellValueFactory(new PropertyValueFactory<Offer,Float>("prix"));
     	this.NbrPlaceOffre.setCellValueFactory(new PropertyValueFactory<Offer,Integer>("Nbr_places"));
     	this.IdUser2.setCellValueFactory(new PropertyValueFactory<Offer,Long>("Id_Utilisateur"));
+    	Tooltip.install(this.resetUser, new Tooltip("Actualiser"));
+    	Tooltip.install(this.DeleteUser, new Tooltip("Supprimer"));
+    	Tooltip.install(this.exitUser, new Tooltip("Sortir"));
+    	
+    	
     	tableOffre.setItems(dataOffre);
     }
     @FXML
@@ -314,7 +321,7 @@ public class AdminController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		if(BonAdm != null) {
-			BonAdm.setText("Bienvenu "+LoginController.admin.getMesInf().get(0).getNom());
+			BonAdm.setText("Bienvenue "+LoginController.admin.getMesInf().get(0).getNom());
 		}
 		if(this.tableUser != null )  this.afficherUtilisateurs();
 		if(this.tableOffre != null ) this.afficherOffres();
