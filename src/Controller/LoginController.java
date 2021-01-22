@@ -1,57 +1,71 @@
 package Controller;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import application.Administrateur;
-import application.SendEmail;
-import application.Utilisateur;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import java.util.*;
+import application.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 public class LoginController implements Initializable{
+	
+	//Les attributs
+    @FXML public static Utilisateur user = new Utilisateur();
+    @FXML public static Administrateur admin = new Administrateur();
+
+    @FXML private boolean ShowPasse = false;
+    @FXML private boolean ShowPasseInsUser = false;
+    //PasswordField
     @FXML private PasswordField TextPassword;
-    @FXML private ImageView BackgroundLogin;
+    //Button
     @FXML private Button Register;
     @FXML private TextField TextEmail;
     @FXML private Button Conexion;
     @FXML private Button enrgistrer;
     @FXML private Button IdObliePassword;
+    @FXML private Button exitButt;
+    @FXML private Button ConexionAdm;
+    @FXML private Button SendButton;
+    
+    //TextField
     @FXML private TextField MotDePasse1;
     @FXML private TextField MotDePasse;
     @FXML private TextField ConfirmMotDePasse;
     @FXML private TextField ConfirmMotDePasse1;
-    @FXML private Button ConexionAdm;
-    @FXML private AnchorPane RegisterBackground;
+    @FXML private TextField TextPassword1;
+    @FXML private TextField EmailUserForget;
     @FXML private TextField adresse;
     @FXML private TextField telephone;
     @FXML private TextField nom;
-    @FXML private TextField email;   
-    @FXML private Button exitButt;
+    @FXML private TextField email;  
+
+    //ImageView
+    @FXML private ImageView BackgroundLogin;
     @FXML private ImageView eyeIcon;
     @FXML private ImageView eyeIcon1;
     @FXML private ImageView eyeIconInsUser;
     @FXML private ImageView DeyeIconInsUser;
-    @FXML private TextField TextPassword1;
-    @FXML private TextField EmailUserForget;
-    @FXML private Button SendButton;
+    
+    //AnchorPane
+    @FXML private AnchorPane RegisterBackground;
     @FXML private AnchorPane LoginBack;
-    @FXML private boolean ShowPasse = false;
-    @FXML private boolean ShowPasseInsUser = false;
-    @FXML public static Utilisateur user = new Utilisateur();
-    @FXML public static Administrateur admin = new Administrateur();
+    
+    @Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		if(this.LoginBack != null ) {
+			this.TextPassword1.setVisible(false);
+	    	this.eyeIcon1.setVisible(false);
+		}
+		if(this.RegisterBackground != null) {
+			this.DeyeIconInsUser.setVisible(false);
+			this.MotDePasse1.setVisible(false);
+			this.ConfirmMotDePasse1.setVisible(false);
+		}
+	} 
     @FXML
     public void ExitLogin() throws IOException {
     	this.enrgistrer.getScene().getWindow().hide();
@@ -69,11 +83,10 @@ public class LoginController implements Initializable{
     }
     @FXML
     public void ChargerInterAdm() throws IOException {
-    	
     	Stage EspaceAdm = new Stage();
 		Parent root = FXMLLoader.load(getClass().getResource("/FXML/EspaceAdministrateur.fxml"));
 		Scene scene = new Scene(root);
-		EspaceAdm.setTitle("Espace de l'Administrateur");
+		EspaceAdm.setTitle("Administrateur");
 		EspaceAdm.getIcons().add(new Image("file:../../Images/icon.png"));
 		EspaceAdm.setScene(scene);
 		EspaceAdm.show();
@@ -82,8 +95,9 @@ public class LoginController implements Initializable{
     public void ChargerInterLogin() throws IOException {
     	Stage primaryStage = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/LoginMain.fxml"));
-    	Scene scene = new Scene(root,750,500);
+    	Scene scene = new Scene(root,600,500);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.setTitle("Application Co_Voiturage");
 		primaryStage.getIcons().add(new Image("file:../../Images/icon.png"));
 		primaryStage.show();
@@ -111,8 +125,8 @@ public class LoginController implements Initializable{
         	this.ChargerInterUser();
     	}else {
     		Alert dialog = new Alert(AlertType.ERROR);
-    		dialog.setTitle("Erreur dans L'inscription.");
-    		dialog.setContentText("Les information son invalide !!");
+    		dialog.setTitle("Erreur dans l'inscription.");
+    		dialog.setContentText("Les informations son invalide !!");
     		dialog.showAndWait();
     	}
     }
@@ -127,8 +141,8 @@ public class LoginController implements Initializable{
     		this.ChargerInterAdm();
     	}else {
     		Alert dialog = new Alert(AlertType.ERROR);
-    		dialog.setTitle("Erreur.");
-    		dialog.setContentText("Les information son invalide !!");
+    		dialog.setTitle("ERREUR !");
+    		dialog.setContentText("Les informations son invalide !!");
     		dialog.showAndWait();
     	}
     }
@@ -137,7 +151,8 @@ public class LoginController implements Initializable{
     	this.IdObliePassword.getScene().getWindow().hide();
     	Stage primaryStage = new Stage();
     	Parent root = FXMLLoader.load(getClass().getResource("/FXML/ForgetPassword.fxml"));
-    	Scene scene = new Scene(root,750,500);
+    	Scene scene = new Scene(root,600,500);
+    	primaryStage.setResizable(false);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Application Co_Voiturage");
 		primaryStage.getIcons().add(new Image("file:../../Images/icon.png"));
@@ -147,7 +162,7 @@ public class LoginController implements Initializable{
     public void Enrgistrer() throws IOException {
     	String reg="^$";
     	String regEmail = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
-    	String regTel="^0[67][0-9]+$";
+    	String regTel="^0[5-7][0-9]+$";
     	if(nom.getText().matches(reg) || email.getText().matches(reg) || (this.ShowPasseInsUser ==true ? MotDePasse1.getText().matches(reg):MotDePasse.getText().matches(reg)) || telephone.getText().matches(reg) || adresse.getText().matches(reg)) {
     		Alert dialog = new Alert(AlertType.ERROR);
     		dialog.setTitle("Attention.");
@@ -168,9 +183,9 @@ public class LoginController implements Initializable{
 	    }else {
 	    	if((!MotDePasse.getText().equals(ConfirmMotDePasse.getText()) && !this.ShowPasseInsUser ) || (!MotDePasse1.getText().equals(ConfirmMotDePasse1.getText()) && this.ShowPasseInsUser)){
 		    	Alert dialog = new Alert(AlertType.ERROR);
-		    	dialog.setTitle("Erreur dans L'inscription.");
+		    	dialog.setTitle("Erreur dans l'inscription.");
 		    	dialog.setHeaderText("Erreur dans le mot de passe.");
-		    	dialog.setContentText("Les deux mot de passe ns sont pas identique!!");
+		    	dialog.setContentText("Les deux mot de passe ne sont pas identique !!");
 		    	dialog.showAndWait();
 		    }else {
 		    	    String PasswordUser = "";
@@ -184,8 +199,8 @@ public class LoginController implements Initializable{
 		    			}
 		    		}else {
 		    			Alert dialog = new Alert(AlertType.ERROR);
-		        		dialog.setTitle("Erreur dans L'inscription.");
-		        		dialog.setContentText("Les information son invalide !!");
+		        		dialog.setTitle("Erreur dans l'inscription.");
+		        		dialog.setContentText("Les informations son invalide !!");
 		        		dialog.showAndWait();
 		    		}
 		    	}
@@ -239,22 +254,22 @@ public class LoginController implements Initializable{
     	String regEmail = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}$";
     	if(this.EmailUserForget.getText().matches(reg)) {
     		Alert dialog = new Alert(AlertType.ERROR);
-    		dialog.setTitle("Erreur.");
-    		dialog.setContentText("Le champe de l'email est vide !!");
+    		dialog.setTitle("ERREUR !");
+    		dialog.setContentText("Le champs de l'émail est vide !!");
     		dialog.showAndWait();
     	}else if(!this.EmailUserForget.getText().matches(regEmail)) {
     		Alert dialog = new Alert(AlertType.ERROR);
     		dialog.setTitle("Erreur.");
-    		dialog.setContentText("Le Synatxe de l'email est faux !!");
+    		dialog.setContentText("Le synatxe de l'email est faux !!");
     		dialog.showAndWait();
     	}else {
     		Utilisateur user = new Utilisateur();
     		long IdUser = user.getIdOfEmail(this.EmailUserForget.getText());
     		if(IdUser != -1 ) {
-    		         if(SendEmail.Send(this.EmailUserForget.getText(),"Votre ancien mot de passe est : <b>" +user.GetMyPassword(IdUser)+"</b>","Initialisation du mot de passe",user.getNomUtilById(IdUser))) {
+    		         if(SendEmail.Send(this.EmailUserForget.getText(),"<div>Salut <b>"+user.getNomUtilById(IdUser)+"</b></div><p>Mot de passe oublié?</p><p>Nous avons reçu une demande d'envoi de votre mot de passe pour votre compte.</p><p>Votre mot de passe est :<b>" +user.GetMyPassword(IdUser)+"</b></p>","Initialisation du mot de passe")) {
     		        	 Alert dialog = new Alert(AlertType.CONFIRMATION);
-    		     		 dialog.setTitle("Succe.");
-    		     		 dialog.setContentText("vous recevoir le mot de passe dans votre email!!");
+    		     		 dialog.setTitle("Succès !");
+    		     		 dialog.setContentText("Mot de passe envoyé, vérifiez votre boîte de réception!!");
     		     		 Optional<ButtonType> result = dialog.showAndWait();
     		     		 if(result.get() == ButtonType.OK) {
     		     			this.SendButton.getScene().getWindow().hide();
@@ -262,28 +277,16 @@ public class LoginController implements Initializable{
     		     		}
     		         }else {
     		        	Alert dialog = new Alert(AlertType.ERROR);
-    		     		dialog.setTitle("Erreur.");
-    		     		dialog.setContentText("probléme de connexion !!");
+    		     		dialog.setTitle("ERREUR !.");
+    		     		dialog.setContentText("Problème !!");
     		     		dialog.showAndWait();
     		         }
     	}else {
     			Alert dialog = new Alert(AlertType.ERROR);
-        		dialog.setTitle("Erreur.");
-        		dialog.setContentText(" ce email n'exist pas !!");
+        		dialog.setTitle("ERREUR !.");
+        		dialog.setContentText("Cet e-mail n'existe pas !!");
         		dialog.showAndWait();
     		}
     	}
     }
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		if(this.LoginBack != null ) {
-			this.TextPassword1.setVisible(false);
-	    	this.eyeIcon1.setVisible(false);
-		}
-		if(this.RegisterBackground != null) {
-			this.DeyeIconInsUser.setVisible(false);
-			this.MotDePasse1.setVisible(false);
-			this.ConfirmMotDePasse1.setVisible(false);
-		}
-	} 
 }
