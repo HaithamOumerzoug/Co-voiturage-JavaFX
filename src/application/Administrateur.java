@@ -3,7 +3,7 @@ import java.lang.String;
 import java.sql.*;
 import java.util.*;
 public class Administrateur {
-	private long id;
+	//private long id;
 	private String nom;
 	private String email;
 	private String mot_de_passe;
@@ -14,16 +14,6 @@ public class Administrateur {
 	public Administrateur() {
 		super();
 	}
-	public Administrateur(long id,String nom,String email,String mot_de_passe,String tel,String adresse) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.email = email;
-		this.mot_de_passe = mot_de_passe;
-		this.tel = tel;
-		this.adresse = adresse;
-	}
-	
 	public Administrateur(String nom, String email, String mot_de_passe, String tel, String adresse) {
 		super();
 		this.nom = nom;
@@ -121,7 +111,7 @@ public class Administrateur {
 				st.executeUpdate(sql0);
 				String sql01 = "delete from reservations where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql01);
-				String sql1 = "delete from Offres where Id_Utilisateur = '"+IdUser+"'";
+				String sql1 = "delete from offres where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql1);
 				String sql11 = " delete from favoris where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql11);
