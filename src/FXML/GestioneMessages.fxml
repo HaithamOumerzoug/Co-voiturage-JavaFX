@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="1000.0" prefHeight="500.0" prefWidth="1000.0" style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+   <children>
+      <VBox layoutX="10.0" layoutY="10.0" minHeight="500.0" minWidth="1000.0" prefHeight="500.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="439.0" prefWidth="691.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <TableView fx:id="tableMessages" layoutY="110.0" prefHeight="434.0" prefWidth="906.0" style="-fx-background-color: #e3f1fc;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="110.0">
+                     <columns>
+                        <TableColumn fx:id="emailSrc" prefWidth="210.0" text="Source" />
+                        <TableColumn fx:id="Contenue" prefWidth="695.0" text="Contenue" />
+                     </columns>
+                  </TableView>
+                  <ImageView fx:id="resetMessage" fitHeight="51.0" fitWidth="51.0" layoutX="14.0" layoutY="46.0" onMouseClicked="#AfficherMessages" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="30.0">
+                     <image>
+                        <Image url="@../../Images/reset.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="exitUser" fitHeight="51.0" fitWidth="51.0" layoutX="837.0" layoutY="37.0" onMouseClicked="#exitToIntrUser" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="90.0">
+                     <image>
+                        <Image url="@../../Images/exit.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutX="320.0" layoutY="14.0" prefHeight="31.0" prefWidth="361.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold;" text="Gestion des Messages:" AnchorPane.leftAnchor="320.0" AnchorPane.rightAnchor="319.0" />
+                  <ImageView fx:id="DeleteMessage" fitHeight="51.0" fitWidth="60.0" layoutX="926.0" layoutY="37.0" onMouseClicked="#SupprimerMessages" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.0">
+                     <image>
+                        <Image url="@../../Images/supprimer.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+                  <ImageView fx:id="envoyer_message" fitHeight="51.0" fitWidth="51.0" layoutX="101.0" layoutY="46.0" onMouseClicked="#toEnvoyerMessage" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="90.0">
+                     <image>
+                        <Image url="@../../Images/envoyer.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
