@@ -2,16 +2,16 @@ package application;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.scene.*;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.image.Image;
 public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 			Parent root = FXMLLoader.load(getClass().getResource("/FXML/LoginMain.fxml"));
-			Scene scene = new Scene(root,600,500);
-		    primaryStage.setResizable(false);
+			Scene scene = new Scene(root,750,500);
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Application Co-Voiturage");
+			primaryStage.setTitle("Application Co_Voiturage");
 			primaryStage.getIcons().add(new Image("file:../../Images/icon.png"));
 			primaryStage.show();
 	}

@@ -1,29 +1,19 @@
 package application;
-
 import java.sql.*;
-
-public class ConnexionMysql {
+public class ConnexionMysql{
 	Connection con=null;
-	
 	public ConnexionMysql() {
 		super();
 	}
-	public Connection ConnDB() {
-		try {
-			String db_name = "Co-voiturage";
-			String user = "phpmyadmin";
-			String pwd = "root";
-			Class.forName("com.mysql.jdbc.Driver");  
-			con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,user,pwd);  
+	 public  Connection ConnDB(){
+		 try {
+			 Class.forName("com.mysql.jdbc.Driver");
+			 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/covoiturage?autoReconnect=true&useSSL=false","root","mysql");
 			 return con;
-
-		}catch(Exception e) {
-			return null;
-		}
-		
-	}
-
-	
+		 }catch(Exception  e) {
+			 return null;
+		 }
+	 }
 	 public String chiffrer(String mot) {
 		    int k=3;
 		    int r;
@@ -56,6 +46,5 @@ public class ConnexionMysql {
 	        }
 			return resu;
 		}
-
 }
 

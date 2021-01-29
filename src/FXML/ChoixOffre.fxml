@@ -1,28 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
    <children>
       <VBox layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="303.0" prefWidth="600.0">
          <children>
             <AnchorPane prefHeight="408.0" prefWidth="600.0">
                <children>
-                  <Label alignment="CENTER" layoutX="196.0" layoutY="55.0" prefHeight="31.0" prefWidth="209.0" style="-fx-font-family: Open Sans; -fx-font-size: 14pt; -fx-font-weight: bold; -fx-text-alignment: center;" text="Choisir un offre" />
-                  <Button fx:id="applymodifier" layoutX="308.0" layoutY="215.0" mnemonicParsing="false" onAction="#toModifierOffer" prefHeight="41.0" prefWidth="158.0" style="-fx-background-color: #ffbb33; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Modifier" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button fx:id="exitButtChoix" layoutX="135.0" layoutY="215.0" mnemonicParsing="false" onAction="#toMesOffres" prefHeight="41.0" prefWidth="158.0" style="-fx-background-color: #ff4444; -fx-font-size: 13pt; -fx-background-radius: 8;" text="exit" textFill="WHITE">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <ComboBox fx:id="ChoiceOffer" layoutX="135.0" layoutY="131.0" prefHeight="41.0" prefWidth="331.0" style="-fx-background-radius: 8;" visibleRowCount="8" />
+                  <Label layoutX="196.0" layoutY="55.0" prefHeight="31.0" prefWidth="209.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold; -fx-text-alignment: center;" text="Choisir un offre :" />
+                  <Button fx:id="applymodifier" layoutX="308.0" layoutY="225.0" mnemonicParsing="false" onAction="#toModifierOffer" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: green; -fx-font-size: 15pt; -fx-font-family: monospace;" text="Modifier" textFill="WHITE" />
+                  <Button fx:id="exitButtChoix" layoutX="158.0" layoutY="225.0" mnemonicParsing="false" onAction="#toMesOffres" prefHeight="41.0" prefWidth="135.0" style="-fx-background-color: red; -fx-font-size: 13pt;" text="exit" textFill="WHITE" />
+                  <ComboBox fx:id="ChoiceOffer" layoutX="132.0" layoutY="131.0" prefHeight="41.0" prefWidth="323.0" visibleRowCount="8" />
                </children>
             </AnchorPane>
          </children>

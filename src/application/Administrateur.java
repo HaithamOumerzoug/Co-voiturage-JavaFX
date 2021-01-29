@@ -111,7 +111,7 @@ public class Administrateur {
 				st.executeUpdate(sql0);
 				String sql01 = "delete from reservations where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql01);
-				String sql1 = "delete from offres where Id_Utilisateur = '"+IdUser+"'";
+				String sql1 = "delete from Offres where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql1);
 				String sql11 = " delete from favoris where Id_Utilisateur = '"+IdUser+"'";
 				st.executeUpdate(sql11);

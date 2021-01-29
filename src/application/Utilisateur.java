@@ -240,9 +240,9 @@ public class Utilisateur {
 			}
 			if(Le_Reste != 0 && NbrDePlace <= Le_Reste) {
 				String sql1 = "Update offres set Nbr_places = '"+(Le_Reste-NbrDePlace)+"'where Id_offer ='"+IdOffres+"';";
-				String sql2 = "insert into reservations ( Id_Utilisateur,Id_offer,message,Nbr_places ) values ('"+this.IdUser+"','"+IdOffres+"','"+message+"','"+NbrDePlace+"');";
-				st.executeUpdate(sql2);
+				String sql2 = "insert into reservations (Id_Utilisateur,Id_offer,message,Nbr_places) values ('"+this.IdUser+"','"+IdOffres+"','"+message+"','"+NbrDePlace+"');";
 				st.executeUpdate(sql1);
+				st.executeUpdate(sql2);
 				nbr = 1;
 			}else nbr = 0;
 		}catch(SQLException e) {
@@ -465,7 +465,7 @@ public class Utilisateur {
 			}
 			
 			}catch(SQLException e) {
-				nom="";
+				e.printStackTrace();
 			}
 		return nom;
 	}
@@ -475,44 +475,25 @@ public class Utilisateur {
 			st = con.createStatement();
 			ResultSet resu;
 			String sql=null;
-			sql = "select * from reservations where  Id_Utilisateur !='"+this.IdUser+"'";
+			sql = "select utilisateurs.Nom as Nom,offres.Titre as NomOffre,reservations.message,reservations.Nbr_places from offres ,reservations, utilisateurs where  reservations.Id_Utilisateur !='"+this.IdUser+"' and utilisateurs.Id_Utilisateur=reservations.Id_Utilisateur and offres.Id_Offer=reservations.Id_offer and  offres.Id_Utilisateur='"+this.IdUser+"'";
 			resu = st.executeQuery(sql);
 			return resu;
 			
 			}catch(SQLException e) {
+				e.printStackTrace();
 				return null;
 			}
 	}
 	public boolean SuppDemRec(long id_utilisateur , long id_offre) {
-		Statement st;
 		try {
+			Statement st;
 			st = con.createStatement();
-			String sql=null;
-			sql = "delete from reservations where Id_Utilisateur ='"+id_utilisateur+"' and Id_offer ='"+id_offre+"'";
+			String sql = "delete from reservations where Id_Utilisateur ='"+id_utilisateur+"' and Id_offer ='"+id_offre+"'";
 			st.executeUpdate(sql);
 			return true;
 		} catch (SQLException e) {
 			return false;
 		}
-		
-	}
-	public String getTitreOfferById(long id_offer) {
-		String titre="";
-		try {
-			Statement st;
-			st = con.createStatement();
-			ResultSet resu;
-			String sql=null;
-			sql = "select Titre from offres where  Id_offer ='"+id_offer+"'";
-			resu = st.executeQuery(sql);
-			while(resu.next()) {
-				titre = resu.getString("Titre");
-			}
-			
-			}catch(SQLException e) {
-				titre="";
-			}
-		return titre;
 	}
 	public boolean SetNewPassword(long IdUtilisateur) {
 		boolean b=false;

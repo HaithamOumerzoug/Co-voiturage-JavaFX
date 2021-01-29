@@ -6,7 +6,7 @@ public class SendEmail{
 			Email email = new Email("CovoiturageMaroc2021@gmail.com","Covoadmin123");
 			email.setFrom("CovoiturageMaroc2021@gmail.com","App Covoiturage");
 			email.setSubject(Subject);
-			email.setContent(""+MsgContent+"","text/html");
+			email.setContent("<h3>"+MsgContent+"</h3>","text/html");
 			email.addRecipient(toEmail);
 			email.send();
 			return true;

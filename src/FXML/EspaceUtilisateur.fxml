@@ -1,37 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
-   <children>
-      <VBox layoutX="165.0" layoutY="95.0" minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane prefHeight="400.0" prefWidth="747.0" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0">
-               <children>
-                  <Label fx:id="BonUser" alignment="CENTER" layoutX="69.0" layoutY="35.0" prefHeight="58.0" prefWidth="463.0" style="-fx-font-size: 20pt; -fx-font-weight: bold; -fx-font-family: Open Sans;" text="Bienvenue l'utilisateur" AnchorPane.leftAnchor="69.0" AnchorPane.rightAnchor="68.0" />
-                  <Button fx:id="OffreU" alignment="CENTER" layoutX="175.0" layoutY="138.0" mnemonicParsing="false" onAction="#toOffresAll" prefHeight="58.0" prefWidth="250.0" style="-fx-background-color: #e3f1fc; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Offres" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button fx:id="EspU" alignment="CENTER" layoutX="175.0" layoutY="222.0" mnemonicParsing="false" onAction="#toMonEsp" prefHeight="58.0" prefWidth="250.0" style="-fx-background-color: #e3f1fc; -fx-font-size: 15pt; -fx-font-family: OPen Sans; -fx-background-radius: 8;" text="Mon Espace" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button fx:id="MessageU" alignment="CENTER" layoutX="175.0" layoutY="306.0" mnemonicParsing="false" onAction="#toGestionnaireMessage" prefHeight="58.0" prefWidth="250.0" style="-fx-background-color: #e3f1fc; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Messages" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <Button fx:id="DeconnexionU" alignment="CENTER" layoutX="175.0" layoutY="390.0" mnemonicParsing="false" onAction="#ExitInterLogin" prefHeight="58.0" prefWidth="250.0" style="-fx-background-color: #ff4444; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Déconnexion" textFill="WHITE" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="175.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-               </children>
-            </AnchorPane>
+            <ImageView fitHeight="504.0" fitWidth="754.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.333343505859375" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-9.0">
+               <image>
+                  <Image url="@../../Images/Covo.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="BonUser" layoutX="150.0" layoutY="27.0" prefHeight="58.0" prefWidth="457.0" style="-fx-font-size: 20pt; -fx-font-weight: bold; -fx-font-family: monospace;" text="Bonjour l'utilisateur" textFill="WHITE" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="147.0" />
+            <Button fx:id="OffreU" layoutX="232.0" layoutY="120.0" mnemonicParsing="false" onAction="#toOffresAll" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: blue; -fx-font-size: 15pt; -fx-font-family: monospace;" text="Offres" textFill="WHITE" AnchorPane.leftAnchor="232.0" AnchorPane.rightAnchor="271.0" />
+            <Button fx:id="EspU" layoutX="232.0" layoutY="218.0" mnemonicParsing="false" onAction="#toMonEsp" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: blue; -fx-font-size: 15pt; -fx-font-family: monospace;" text="Mon Espace" textFill="WHITE" AnchorPane.leftAnchor="232.0" AnchorPane.rightAnchor="271.0" />
+            <Button fx:id="MessageU" layoutX="232.0" layoutY="302.0" mnemonicParsing="false" onAction="#toGestionnaireMessage" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: blue; -fx-font-size: 15pt; -fx-font-family: monospace;" text="Messages" textFill="WHITE" AnchorPane.leftAnchor="232.0" AnchorPane.rightAnchor="271.0" />
+            <Button fx:id="DeconnexionU" layoutX="232.0" layoutY="384.0" mnemonicParsing="false" onAction="#ExitInterLogin" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: blue; -fx-font-size: 15pt; -fx-font-family: monospace;" text="Deconnexion" textFill="WHITE" AnchorPane.leftAnchor="232.0" AnchorPane.rightAnchor="271.0" />
          </children>
-      </VBox>
-   </children>
-</AnchorPane>
+    </AnchorPane>
+  </children>
+</VBox>

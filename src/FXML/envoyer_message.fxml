@@ -1,30 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
-   <children>
-      <VBox layoutX="10.0" layoutY="10.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <Label alignment="CENTER" layoutX="127.0" layoutY="36.0" prefHeight="40.0" prefWidth="346.0" style="-fx-font-size: 14pt; -fx-font-family: Open Sans; -fx-font-weight: bold;" text="Envoyer un message" AnchorPane.leftAnchor="127.0" AnchorPane.rightAnchor="127.0" />
-                  <Button fx:id="EnvoyerMessage" layoutX="111.0" layoutY="317.0" mnemonicParsing="false" onAction="#EnvoyerMessage" prefHeight="40.0" prefWidth="378.0" style="-fx-font-family: OPen Sans; -fx-font-weight: bold; -fx-background-color: #0d9dd2; -fx-font-size: 12pt; -fx-background-radius: 8;" text="Envoyer" textFill="WHITE" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="111.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <TextField fx:id="EmailDest" layoutX="111.0" layoutY="90.0" prefHeight="40.0" prefWidth="418.0" promptText="l'email de destination" style="-fx-border-color: #00ffa3; -fx-font-family: Open Sans; -fx-font-size: 13pt; -fx-background-radius: 8;" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="111.0" />
-                  <TextArea fx:id="MessageEnv" layoutX="111.0" layoutY="147.0" prefHeight="156.0" prefWidth="418.0" promptText="Entrer votre message" style="-fx-border-color: #00ffa3; -fx-font-size: 13pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" AnchorPane.leftAnchor="111.0" AnchorPane.rightAnchor="111.0" />
-               </children>
-            </AnchorPane>
+            <Label layoutX="51.0" layoutY="31.0" prefHeight="40.0" prefWidth="346.0" style="-fx-font-size: 14pt; -fx-font-family: monospace; -fx-font-weight: bold;" text="Envoyer un message :" textFill="#00ffa3" />
+            <Button fx:id="EnvoyerMessage" layoutX="397.0" layoutY="324.0" mnemonicParsing="false" onAction="#EnvoyerMessage" prefHeight="40.0" prefWidth="114.0" style="-fx-font-family: monospace; -fx-font-weight: bold; -fx-background-color: blue; -fx-font-size: 12pt;" text="Envoyer" textFill="WHITE" AnchorPane.rightAnchor="129.0" />
+            <TextArea fx:id="MessageEnv" layoutX="93.0" layoutY="145.0" prefHeight="156.0" prefWidth="418.0" promptText="entrer votre message" style="-fx-border-color: #00ffa3; -fx-font-size: 13pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="129.0" />
+            <TextField fx:id="EmailDest" layoutX="93.0" layoutY="88.0" prefHeight="40.0" prefWidth="418.0" promptText="l'email de destination" style="-fx-border-color: #00ffa3; -fx-font-family: monospace; -fx-font-size: 13pt;" AnchorPane.leftAnchor="93.0" AnchorPane.rightAnchor="129.0" />
          </children>
-      </VBox>
-   </children>
-</AnchorPane>
+    </AnchorPane>
+  </children>
+</VBox>

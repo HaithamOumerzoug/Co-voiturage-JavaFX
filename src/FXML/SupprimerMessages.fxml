@@ -1,27 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
-   <children>
-      <VBox layoutX="158.0" layoutY="61.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="397.0" prefWidth="600.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" layoutX="55.0" layoutY="73.0" prefHeight="40.0" prefWidth="490.0" style="-fx-font-size: 14pt; -fx-font-family: Open Sans; -fx-font-weight: bold;" text="Supprimer les messages reçu par un utilisateur :" />
-                  <Button layoutX="215.0" layoutY="262.0" mnemonicParsing="false" onAction="#SupprimerMessages" prefHeight="40.0" prefWidth="172.0" style="-fx-font-family: Open sans; -fx-font-weight: bold; -fx-background-color: #ff4444; -fx-font-size: 12pt; -fx-background-radius: 8;" text="Supprimer" textFill="WHITE" AnchorPane.rightAnchor="213.0">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></Button>
-                  <TextField fx:id="EmailUserMessage" layoutX="90.0" layoutY="167.0" prefHeight="40.0" prefWidth="423.0" promptText="Entrer l'email de l'utilisateur" style="-fx-font-size: 14pt; -fx-font-family: Open sans; -fx-background-radius: 8;" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="87.0" />
-               </children>
-            </AnchorPane>
+            <Label layoutX="51.0" layoutY="31.0" prefHeight="40.0" prefWidth="346.0" style="-fx-font-size: 14pt; -fx-font-family: monospace; -fx-font-weight: bold;" text="Supprimer Les Message recu par un utilisateur :" textFill="#00ffa3" />
+            <TextField fx:id="EmailUserMessage" layoutX="51.0" layoutY="110.0" prefHeight="40.0" prefWidth="381.0" promptText="Entrer l'email de l'utilisateur" style="-fx-font-size: 14pt; -fx-font-family: monospace;" AnchorPane.leftAnchor="51.0" AnchorPane.rightAnchor="208.0" />
+            <Button layoutX="318.0" layoutY="200.0" mnemonicParsing="false" onAction="#SupprimerMessages" prefHeight="40.0" prefWidth="114.0" style="-fx-font-family: monospace; -fx-font-weight: bold; -fx-background-color: blue; -fx-font-size: 12pt;" text="Supprimer" textFill="WHITE" AnchorPane.rightAnchor="208.0" />
          </children>
-      </VBox>
-   </children>
-</AnchorPane>
+    </AnchorPane>
+  </children>
+</VBox>

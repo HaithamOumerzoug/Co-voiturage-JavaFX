@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -11,117 +10,111 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="1300.0" prefHeight="500.0" prefWidth="1300.0" style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
-   <children>
-      <VBox layoutX="10.0" layoutY="10.0" minHeight="500.0" minWidth="1300.0" prefHeight="500.0" prefWidth="1300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+<VBox minHeight="529.0" minWidth="950.0" prefHeight="529.0" prefWidth="1250.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minWidth="500.0" prefHeight="580.0" prefWidth="949.0" VBox.vgrow="ALWAYS">
          <children>
-            <AnchorPane maxHeight="-1.0" maxWidth="-1.0" minHeight="500.0" minWidth="1300.0" prefHeight="500.0" prefWidth="1300.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <TableView fx:id="tableOfferAll" layoutY="110.0" minHeight="500.0" minWidth="1300.0" prefHeight="500.0" prefWidth="1300.0" style="-fx-background-color: #e3f1fc;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="120.0">
-                     <columns>
-                        <TableColumn fx:id="IdOffre" prefWidth="75.0" text="ID " />
-                        <TableColumn fx:id="TitreOffre" prefWidth="181.0" text="Titre" />
-                        <TableColumn fx:id="Ville_departAll" minWidth="0.0" prefWidth="156.0" text="Ville de départ" />
-                        <TableColumn fx:id="Ville_arriveAll" minWidth="1.0" prefWidth="145.0" text="Ville d'arrivée" />
-                        <TableColumn fx:id="Date_depart" prefWidth="100.0" text="Date départ" />
-                        <TableColumn fx:id="Heure_depart" prefWidth="120.0" text="Heure Départ" />
-                        <TableColumn fx:id="NbrPlaceOffre" minWidth="0.0" prefWidth="151.0" text="Nombre de places" />
-                        <TableColumn fx:id="nbrPlacesreserv" prefWidth="100.0" text="Places réseérvés" />
-                        <TableColumn fx:id="PrixOffre" minWidth="0.0" prefWidth="83.0" text="Prix" />
-                        <TableColumn fx:id="bagageAll" minWidth="50.0" prefWidth="147.0" text="Bagage" />
-                     </columns>
-                  </TableView>
-                  <Label fx:id="grandLabel" alignment="CENTER" layoutX="556.0" layoutY="3.0" minHeight="31.0" minWidth="215.0" prefHeight="31.0" prefWidth="215.0" style="-fx-font-family: Open Sans; -fx-font-size: 14pt; -fx-font-weight: bold;" text="Offres disponibles" AnchorPane.leftAnchor="556.0" AnchorPane.rightAnchor="529.0">
-                     <tooltip>
-                        <Tooltip text="Les offres disponibles des autres utilisateurs" />
-                     </tooltip>
-                  </Label>
-                  <ImageView fx:id="ExitBtt" fitHeight="51.0" fitWidth="75.0" layoutX="1221.0" layoutY="57.0" onMouseClicked="#ExitToUser" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.0">
-                     <image>
-                        <Image url="@../../Images/exit.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="Favoris" fitHeight="51.0" fitWidth="51.0" focusTraversable="true" layoutX="167.0" layoutY="61.0" onMouseClicked="#addToFavoris" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/favoris.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="Apply" fitHeight="51.0" fitWidth="51.0" focusTraversable="true" layoutX="95.0" layoutY="61.0" onMouseClicked="#applyToOffer" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/apply.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="actualiserAll" fitHeight="51.0" fitWidth="51.0" layoutX="21.0" layoutY="61.0" onMouseClicked="#afficherOffres" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0">
-                     <image>
-                        <Image url="@../../Images/reset.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Glow />
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="favorisOnly" fitHeight="51.0" fitWidth="51.0" layoutX="556.0" layoutY="57.0" onMouseClicked="#showFavorisOnly" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/favorisonly.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="favorisDelete" fitHeight="51.0" fitWidth="51.0" layoutX="1143.0" layoutY="57.0" onMouseClicked="#deleteFromFavoris" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="100.0">
-                     <image>
-                        <Image url="@../../Images/favorisdelete.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="reservationBtt" fitHeight="51.0" fitWidth="75.0" layoutX="698.0" layoutY="57.0" onMouseClicked="#afficherReserv" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../Images/reservation.png" />
-                     </image>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                     <effect>
-                        <Blend />
-                     </effect>
-                  </ImageView>
-                  <Label fx:id="nbrOffres" alignment="CENTER" layoutX="546.0" layoutY="34.0" minHeight="31.0" minWidth="78.0" prefHeight="31.0" prefWidth="236.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold;" text="offres">
-                     <tooltip>
-                        <Tooltip text="nombre d'offres disponibles" />
-                     </tooltip>
-                  </Label>
-               </children>
-            </AnchorPane>
+            <TableView fx:id="tableOfferAll" layoutY="110.0" prefHeight="80.0" prefWidth="821.0" style="-fx-background-color: rgb(200,200,200);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="110.0">
+               <columns>
+                  <TableColumn fx:id="IdOffre" prefWidth="75.0" text="ID " />
+                  <TableColumn fx:id="TitreOffre" prefWidth="181.0" text="Titre" />
+                  <TableColumn fx:id="Ville_departAll" minWidth="0.0" prefWidth="156.0" text="Ville de départ" />
+                  <TableColumn fx:id="Ville_arriveAll" minWidth="1.0" prefWidth="145.0" text="Ville d'arrivée" />
+                  <TableColumn fx:id="Date_depart" prefWidth="100.0" text="Date départ" />
+                  <TableColumn fx:id="Heure_depart" prefWidth="120.0" text="Heure Départ" />
+                  <TableColumn fx:id="NbrPlaceOffre" minWidth="0.0" prefWidth="151.0" text="Nombre de places" />
+                  <TableColumn fx:id="nbrPlacesreserv" prefWidth="100.0" text="Places réseérvés" />
+                  <TableColumn fx:id="PrixOffre" minWidth="0.0" prefWidth="83.0" text="Prix" />
+                  <TableColumn fx:id="bagageAll" minWidth="50.0" prefWidth="147.0" text="Bagage" />
+               </columns>
+            </TableView>
+            <Label fx:id="grandLabel" layoutX="535.0" layoutY="-1.0" minHeight="31.0" minWidth="361.0" prefHeight="31.0" prefWidth="361.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold;" text="Offres disponibles" AnchorPane.leftAnchor="535.0" AnchorPane.rightAnchor="104.0">
+               <tooltip>
+                  <Tooltip text="Les offres disponibles des autres utilisateurs" />
+               </tooltip></Label>
+            <ImageView fx:id="ExitBtt" fitHeight="51.0" fitWidth="75.0" layoutX="455.0" layoutY="55.0" onMouseClicked="#ExitToUser" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/exit.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="Favoris" fitHeight="61.0" fitWidth="65.0" focusTraversable="true" layoutX="169.0" layoutY="44.0" onMouseClicked="#addToFavoris" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/favoris.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="Apply" fitHeight="47.0" fitWidth="52.0" focusTraversable="true" layoutX="100.0" layoutY="56.0" onMouseClicked="#applyToOffer" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/apply.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="actualiserAll" fitHeight="51.0" fitWidth="51.0" layoutX="21.0" layoutY="53.0" onMouseClicked="#afficherOffres" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/reset.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Glow />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="favorisOnly" fitHeight="47.0" fitWidth="90.0" layoutX="292.0" layoutY="57.0" onMouseClicked="#showFavorisOnly" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/favorisonly.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="favorisDelete" fitHeight="51.0" fitWidth="75.0" layoutX="245.0" layoutY="55.0" onMouseClicked="#deleteFromFavoris" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/favorisdelete.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="reservationBtt" fitHeight="51.0" fitWidth="75.0" layoutX="392.0" layoutY="56.0" onMouseClicked="#afficherReserv" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Images/reservation.jpg" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <Blend />
+               </effect>
+            </ImageView>
+            <Label fx:id="nbrOffres" layoutX="1017.0" layoutY="63.0" minHeight="31.0" minWidth="209.0" prefHeight="31.0" prefWidth="209.0" style="-fx-font-family: monospace; -fx-font-size: 14pt; -fx-font-weight: bold;" text="offres">
+               <tooltip>
+                  <Tooltip text="nombre d'offres disponibles" />
+               </tooltip>
+            </Label>
          </children>
-      </VBox>
-   </children>
-</AnchorPane>
+    </AnchorPane>
+  </children>
+</VBox>
