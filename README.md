@@ -12,10 +12,10 @@ Aujourd’hui la plupart des gens préfère de voyager par covoiturage, c'est-à
 ## Usage
 1. Créer un nouveu projet JavaFx.
 1. Installation est simple, via la commande :
-```java
-git clone https://github.com/HaithamOumerzoug/Co-voiturage.git
-```
-1. Ensuite, vous pouvez simplement exécuter le projet en tant qu'application Java.
+  ```java
+    git clone https://github.com/HaithamOumerzoug/Co-voiturage.git
+  ```
+3. Ensuite, vous pouvez simplement exécuter le projet en tant qu'application Java.
 
 ## Inerface de l'application
 * ### Login
