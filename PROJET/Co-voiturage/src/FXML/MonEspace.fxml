@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: #6fd1f6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+   <children>
+      <VBox minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane minHeight="500.0" minWidth="600.0" prefHeight="500.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="CENTER" layoutX="218.0" layoutY="35.0" prefHeight="58.0" prefWidth="165.0" style="-fx-font-size: 20pt; -fx-font-weight: bold; -fx-font-family: Open Sans; -fx-text-alignment: center;" text="Mon Espace" textAlignment="RIGHT" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="217.0" />
+                  <Button fx:id="Profile" alignment="CENTER" layoutX="174.0" layoutY="137.0" mnemonicParsing="false" onAction="#toProfile" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: #e3f1fc; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Profil" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="175.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="MesOffre" alignment="CENTER" layoutX="174.0" layoutY="219.0" mnemonicParsing="false" onAction="#toMesOffres" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: #e3f1fc; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Mes offres" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="175.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="DemRec" alignment="CENTER" layoutX="174.0" layoutY="301.0" mnemonicParsing="false" onAction="#toDemandeRec" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: #e3f1fc; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Demendes reçues" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="175.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="retour" alignment="CENTER" layoutX="174.0" layoutY="386.0" mnemonicParsing="false" onAction="#exitToIntrUser" prefHeight="58.0" prefWidth="251.0" style="-fx-background-color: #0d9dd2; -fx-font-size: 15pt; -fx-font-family: Open Sans; -fx-background-radius: 8;" text="Retour" textFill="WHITE" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="175.0">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

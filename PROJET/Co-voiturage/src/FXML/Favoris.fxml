@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.UserController">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Label alignment="CENTER" layoutX="128.0" layoutY="31.0" prefHeight="40.0" prefWidth="346.0" style="-fx-font-size: 14pt; -fx-font-family: Open Sans; -fx-font-weight: bold;" text="Ajouter une Offre au Favoris" textFill="#0032ff" />
+            <TextField fx:id="idOffreFavoris" layoutX="110.0" layoutY="110.0" prefHeight="40.0" prefWidth="381.0" promptText="Entrer l'ID de l'offre" style="-fx-font-size: 14pt; -fx-font-family: monospace;" AnchorPane.rightAnchor="149.0" />
+            <Button layoutX="244.0" layoutY="194.0" mnemonicParsing="false" onAction="#favorisOffre" prefHeight="40.0" prefWidth="114.0" style="-fx-font-family: monospace; -fx-font-weight: bold; -fx-background-color: blue; -fx-font-size: 12pt;" text="Ajouter" textFill="WHITE" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
