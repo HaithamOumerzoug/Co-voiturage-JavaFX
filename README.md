@@ -17,24 +17,4 @@ Aujourd’hui la plupart des gens préfère de voyager par covoiturage, c'est-à
   ```
 3. Ensuite, vous pouvez simplement exécuter le projet en tant qu'application Java.
 
-## Interfaces de l'application
-* ### Login
-<p align="left">
-  <img alt="" src="Interface/InerfaceLogin.png" width="400" height="400">
-</p>
-
-* ### Inscription
-<p align="left">
-  <img alt="" src="Interface/Inscrire.png" width="400" height="400">
-</p>
-
-* ### Interface Utilisateur
-<p align="left">
-  <img alt="" src="Interface/InterUser.png" width="400" height="400">
-</p>
-
-* ### Espace Utilisateur
-<p align="left">
-  <img alt="" src="Interface/MonEspace.png" width="400" height="400">
-</p>
 
