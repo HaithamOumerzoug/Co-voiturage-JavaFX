@@ -14,6 +14,7 @@ Aujourd’hui la plupart des gens préfère de voyager par covoiturage, c'est-à
 1. Installation est simple, via la commande :
   ```java
     git clone https://github.com/HaithamOumerzoug/Co-voiturage-JavaFX.git
+    cd Co-voiturage-JavaFX
   ```
 3. Ensuite, vous pouvez simplement exécuter le projet en tant qu'application Java.
 
@@ -43,13 +44,31 @@ Aujourd’hui la plupart des gens préfère de voyager par covoiturage, c'est-à
   <img alt="" src="Interfaces/MyProfile.png" width="400" height="400">
 </p>
 
-* #### Modifier le profil Utilisateur
+  * #### Modifier le profil Utilisateur
 <p align="left">
   <img alt="" src="Interfaces/UpdateProfile.png" width="400" height="400">
 </p>
 
-* ### Ajouter une offre
+* ### Mes Offres
+<p align="left">
+  <img alt="" src="Interfaces/MyOffers.png" width="400" height="400">
+</p>
+
+  * #### Ajouter une offre
 <p align="left">
   <img alt="" src="Interfaces/AddOffer.png" width="400" height="400">
+</p>
+
+  * #### Modifier une offre
+<p align="left">
+  <img alt="" src="Interfaces/UpdateOffer.png" width="400" height="400">
+</p>
+
+* ### Messages
+
+  * #### Envoyer un message
+
+<p align="left">
+  <img alt="" src="Interfaces/SendMessage.png" width="400" height="400">
 </p>
 
