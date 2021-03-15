@@ -51,7 +51,7 @@ Aujourd’hui la plupart des gens préfère de voyager par covoiturage, c'est-à
 
 * ### Mes Offres
 <p align="left">
-  <img alt="" src="Interfaces/MyOffers.png" width="400" height="400">
+  <img alt="" src="Interfaces/MyOffers.png" width="600" height="400">
 </p>
 
   * #### Ajouter une offre
